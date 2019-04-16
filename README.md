@@ -17,3 +17,25 @@ Facebook can add extra distractions and people end up looking at more things tha
 * Min Yang - Head of Design
 
 * Austin Hsieh - Head of Marketing / Engineering
+
+
+# Top Qualities
+* User efficiency: The user should be able to navigate through the website easily, how to upload pictures, sign in/out
+* Portability: Customized UI for mobile and desktop
+* Learnability: Should be easy to learn to use if people use site during their short break
+
+# Medium importance
+* Performance
+* Interoperability
+* Accessibility
+* Usefulness
+
+# Not very important
+* Reliability
+* Robustness
+* Security
+* Verifiability
+* Maintainability
+* Reusability
+* Privacy
+* Consistency
