@@ -56,5 +56,5 @@ Once the user signs out, the log in/ sign up buttons reappear, and the sign out 
 
 ![Mobile View](mockups/mobile_view.jpg)
 
-On mobile portrait mode, pictures are arranged in a single column. On mobile landscape mode and wider computer browsers, pictures are aligned in rows of 3 columns each. For all orientations, the sign up/in/out, search, and upload options will be listed
+On mobile portrait mode, pictures are arranged in a single column. On mobile landscape mode and wider computer browsers, pictures are aligned in rows of 3 columns each. For all orientations, the sign up/in/out, search, and upload options will be listed at the very top.
 
