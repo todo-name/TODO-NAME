@@ -33,7 +33,7 @@ The report option, when clicked, will open the report image dialog.
 - User must be able to click upload button and see their image at the top of the main page in the position
 of the left most frame on the top row.
 - When the newly uploaded picture is posted, the pictures already on the page shift to the frame to their right
-- If picture is already at right most position upon a new picture upload, that picutre gets shifted down a row and
+- If picture is already at right most position upon a new picture upload, that picture gets shifted down a row and
 put in the left most column.
 
 
