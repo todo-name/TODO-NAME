@@ -23,14 +23,18 @@ The report option, when clicked, will open the report image dialog.
 
 ## Upload Image
 - Input field “Title” is optional. Limit is 150 characters.
-- The upload image button will open “Finder” where user can navigate through their directories to find the right image to upload.  (how does this work?)
+- The upload image button will open “Finder” where user can navigate through their directories to find the right image to upload.  
 - Only one image is allowed.  
 - Once image is picked, the user will see the image display and a “Change Image” button will be next to the image if user decide to change to another image.
 - There is a “X” on the top right corner if user want to cancel uploading image. A warning will pop up where user can choose to stay or exit and discard changes.
 - User must be able to add “tags/descriptions” with maximum of 500 characters.
 - User must be able to use “#” to indicate tags.
 - User must be able to use emoji.
-- User must be able to click upload button and see their image at the top of the main page.
+- User must be able to click upload button and see their image at the top of the main page in the position
+of the left most frame on the top row.
+- When the newly uploaded picture is posted, the pictures already on the page shift to the frame to their right
+- If picture is already at right most position upon a new picture upload, that picutre gets shifted down a row and
+put in the left most column.
 
 
 ## Click on Image
@@ -39,7 +43,7 @@ The report option, when clicked, will open the report image dialog.
 - The full screen view must be scrollable if the native height of the image extends beyond the size of the browser.
 - Image max size will be determined by a max height proportional to the browser size.
 - The ellipsis in the top right corner must appear in the corner and be clickable for all users.
-- The like button must appear in the top left corner for logged in users only (what happens if they aren’t logged in).
+- The like button must appear in the top left corner for logged in users only.
 - Clicking the ellipsis must make the additional options menu appear to the right side of it.
 - Clicking the copy button must copy the url for the image’s post to the user’s browser clipboard.
 - Clicking the report button must launch the Report Image popup and make the additional options menu disappear.
@@ -52,13 +56,13 @@ The report option, when clicked, will open the report image dialog.
 - Text in the text area must not persist if the “x” was clicked after text had been written.
 - Closing the popup must return users to their original position.
 - Clicking the report button must communicate the contents of the text area with content moderators.
-- Clicking the report button must provide users visual feedback that their report was submitted.
-- Clicking the report button must close the popup.
+- Clicking the report button clears out the content of the report image popup and shows users visual feedback that says "Report submitted".
+- Clicking the close button below the visual feedback closes the popup and takes user back to original page.
 
 ## Sign Up / Sign In / Sign Out
 - The "Sign In" button is displayed on the top of the screen to the right of the search bar when the user is signed out.
 - The signup button is displayed on the top right of the screen to the right of the "Sign In" button when the user is signed out.
-- Upon clicking the signup button, a popup screen that overlays the main screen is shown with 4 input text fields labelled username, email, password, and confirm password aligned vertically.
+- Upon clicking the signup button, a popup screen that overlays the main screen is shown with 4 input text fields labeled username, email, password, and confirm password aligned vertically.
 - At the bottom of the signup screen are two buttons located side by side with each other named cancel and submit.
 - To exit the signup screen and return to the main page, either click on the cancel button or click anywhere outside the popup screen.
 - If submit button is clicked on and any of the 4 text fields are missing user input, an error message is shown between the bottom of the last text form and the buttons that says “There are incomplete required fields.”
@@ -69,7 +73,7 @@ The report option, when clicked, will open the report image dialog.
 - If there are no errors in all input forms and submit is clicked on, a new user is created and user is redirected to the sign-in page.
 - Sign-in page is a popup screen that overlays the main page.
 - The sign in page is accessed by clicking on the sign in button or from being redirected from the signup page
-- The sign in page must have 2 textareas aligned vertically with the first one labelled username/email and the second one labelled password.
+- The sign in page must have 2 textareas aligned vertically with the first one labeled username/email and the second one labeled password.
 - The bottom of the sign in page has 2 buttons aligned horizontally named Cancel and Submit.
 - Upon pressing the Cancel button or clicking outside the sign in page, the user will exit the sign in page and return to the main page.
 - When the user clicks on submit and username/email is invalid, a message will show above the username/email textarea saying “Invalid username/email”.
