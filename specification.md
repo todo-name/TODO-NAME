@@ -6,7 +6,7 @@ The SearchBox component filters for pictures based on tags and titles
 ### Properties
 |  Name | Type   | Description |  
 |---|---|---|
-| query  |  TextField |  Search term |
+| query  |  String |  Search term |
 |  searchField |  TextField | Area to type query  |
 ### Functionalities
 |  Name |  Parameters |  Return | Behavior  |
