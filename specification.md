@@ -1,6 +1,8 @@
 # Architecture Specification
 
 ## SearchBox
+### Description
+The SearchBox component filters for pictures based on tags and titles
 ### Properties
 |  Name | Type   | Description |  
 |---|---|---|
@@ -14,23 +16,24 @@
 |   |   |   |   |   
 |   |   |   |   |   |
 ### Connections
-- Input:
+- Input: 
 - Output:
 
 ## LogIn
-### Properties
+### Description
+The LogIn component allows users to log in to their account.
 ### Properties
 |  Name | Type   | Description |  
 |---|---|---|
-|   |   |   |
-|   |   |   |
+|  username_email | TextField  | User inputs a username   |
+|   password| TextField  | User inputs password   |
 |   |   |   |   |
 ### Functionalities
 |  Name |  Parameters |  Return | Behavior  |
 |---|---|---|---|
-|   |   |   |   |   
-|   |   |   |   |   
-|   |   |   |   |   |
+| usernameValidation  | username/email  |   |   |   
+|passwordValidation   |password   |   |   |   
+| signIn  |   |   |   |   |
 ### Connections
 - Input:
 - Output:
