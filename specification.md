@@ -4,13 +4,13 @@
 ### Properties
 |  Name | Type   | Description |  
 |---|---|---|
-|   |   |   |
-|   |   |   |
+| query  |  TextField |  Search term |
+|  searchField |  TextField | Area to type query  |
 |   |   |   |   |
 ### Functionalities
 |  Name |  Parameters |  Return | Behavior  |
 |---|---|---|---|
-|   |   |   |   |   
+|  search | query  | Pictures that match query  | The query is matched with tags and titles to narrow down results  |   
 |   |   |   |   |   
 |   |   |   |   |   |
 ### Connections
