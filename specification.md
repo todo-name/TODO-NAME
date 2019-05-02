@@ -6,18 +6,17 @@ The SearchBox component filters for pictures based on tags and titles
 ### Properties
 |  Name | Type   | Description |  
 |---|---|---|
-| query  |  TextField |  Search term |
-|  searchField |  TextField | Area to type query  |
-|   |   |   |   |
+| query  |  String |  Search term |
+|  searchField |  String | Area to type query  |
 ### Functionalities
 |  Name |  Parameters |  Return | Behavior  |
 |---|---|---|---|
 |  search | query  | Pictures that match query  | The query is matched with tags and titles to narrow down results  |   
-|   |   |   |   |   
-|   |   |   |   |   |
 ### Connections
-- Input: 
+- Input:
+User's search input.
 - Output:
+Re-renders landing page in accordance to the search.
 
 ## LogIn
 ### Description
@@ -25,9 +24,8 @@ The LogIn component allows users to log in to their account.
 ### Properties
 |  Name | Type   | Description |  
 |---|---|---|
-|  username_email | TextField  | User inputs a username   |
-|   password| TextField  | User inputs password   |
-|   |   |   |   |
+|  username_email | String  | User inputs a username   |
+|   password| String  | User inputs password   |
 ### Functionalities
 |  Name |  Parameters |  Return | Behavior  |
 |---|---|---|---|
@@ -56,72 +54,75 @@ The LogIn component allows users to log in to their account.
 - Output:
 
 ## UploadDialog
+### Description
+The UploadDialog is a dialog component that allows the user to enter a title, tags, select an image, and then upload it. It communicates with the screen to be shown or hidden from view.
 ### Properties
 |  Name | Type   | Description |  
 |---|---|---|
-|   |   |   |
-|   |   |   |
-|   |   |   |   |
+|titleField|TextField|Accepts text for title|
+|imageSelector|FileSelector|Allows user to select image|
+|tagField|TextField|Allows entry of multiple tags|
 ### Functionalities
 |  Name |  Parameters |  Return | Behavior  |
 |---|---|---|---|
-|   |   |   |   |   
-|   |   |   |   |   
-|   |   |   |   |   |
+|show|   |void|Display dialog in center of screen.|   
+|hide|   |void|Hides dialog.|   
+|uploadPost|title, tags, image|True is upload successful, false otherwise|Takes data from user input fields and uploads it to database. Uses callback to track success of request.|   |
 ### Connections
-- Input:
-- Output:
+- Communicates with the screen to be shown or hidden from view
 
 ## Post
+### Description
+The Post component represents a single image, its title, like count, and tag information. It does not contain UI information, but provides information to be displayed by UI components.
 ### Properties
 |  Name | Type   | Description |  
 |---|---|---|
-|   |   |   |
-|   |   |   |
-|   |   |   |   |
+|imagePath|String   |The path of the image to display   |
+|title|String   |The title of the post   |
+|likeCount   |Integer   |The number of likes for a post   |
+|tags   |Array   |An array of tags relevant to the post   |
 ### Functionalities
 |  Name |  Parameters |  Return | Behavior  |
 |---|---|---|---|
-|   |   |   |   |   
-|   |   |   |   |   
-|   |   |   |   |   |
+|Post   |String, String, Integer, Array ||Constructor. Takes in image path, title, like count, and tags and sets them.   |   
 ### Connections
-- Input:
-- Output:
+- Acts as a pure data storage objects for UI components to access and display.
 
 ## PostTile
+### Description
+The PostTile component is the UI representation of a Post. It displays title, image, like button, and like count. The button has an event listener attached that responds to click events to update like count and fill in the like button.
 ### Properties
 |  Name | Type   | Description |  
 |---|---|---|
-|   |   |   |
-|   |   |   |
-|   |   |   |   |
+|titleLabel|TextLabel   |Text label that show the title of the post   |
+|image|Image   |The image of the post to be displayed   |
+|likeButton|TextField   |Button that allows the user to "like" a post   |   |
+|likeLabel|TextLabel   |Text label that show the number of likes on a post   |   |
+|post|Post   |Post data object   |   |
 ### Functionalities
 |  Name |  Parameters |  Return | Behavior  |
 |---|---|---|---|
-|   |   |   |   |   
-|   |   |   |   |   
-|   |   |   |   |   |
+|PostTile |Post   |   |Constructor. Takes the provided Post object and fills UI components with information from the Post object.
+
 ### Connections
-- Input:
-- Output:
+- Communicates with the screen to be displayed, and with the Post class to retrieve data.
 
 ## Grid
+### Description
+The Grid is a component that loads and organizes a group of PostTiles in a rectangular grid layout.
 ### Properties
 |  Name | Type   | Description |  
 |---|---|---|
-|   |   |   |
-|   |   |   |
-|   |   |   |   |
+|tiles|List   |A list of PostTiles to be displayed as a grid.|
+|width|Integer   |The width of the grid; how many tiles to display horizontally.   |
+|height   |Integer   |The height of the grid; how many tiles to display vertically.   |   |
 ### Functionalities
 |  Name |  Parameters |  Return | Behavior  |
 |---|---|---|---|
-|   |   |   |   |   
-|   |   |   |   |   
-|   |   |   |   |   |
+|Grid   |List<Post>   |   |Constructor. Takes a list of post, generates PostTiles, and displays them in a grid.   |   
+|loadPosts   |List<Post>   |void   |Generates and adds PostTiles to the grid based on the provided list of Posts.   |   
 ### Connections
-- Input:
-- Output:
+- Communicates with the screen to be displayed. Reads information from Post objectiles and creates PostTile components.
 
 ## NavBar
 Locate at the top of the page at all times. Contains the SearchBox component at all times. When user is not signed in, it will contain the SignIn and SignUp button. When user is signed in, it will contain the user’s name and SignOut button.
@@ -135,8 +136,7 @@ Locate at the top of the page at all times. Contains the SearchBox component at 
 |---|---|---|---|
 |  handleClickSignIn()  |  none  | SignIn form in JSX.  |  Opens SignIn form. |   
 | handleClickSignUp()  |  none |  SignUp form in JSX. |  Opens SignUp form. |   
-| handleClickSignOut  | none  |  none | Signs user out by changing the state of signedIn.
-  |   |
+| handleClickSignOut  | none  |  none | Signs user out by changing the state of signedIn.|
 ### Connections
 - Input:
 Connect to SearchBox, SignIn, and SignUp components.
@@ -156,9 +156,8 @@ Navigated by clicking on the dropdown button locate on the top right of an image
 ### Functionalities
 |  Name |  Parameters |  Return | Behavior  |
 |---|---|---|---|
-| copyImage()  | none  | none  |  Copy image URL to the user’s clipboard. Display success message to user.
- |   
-|  handleClickReport() | none  | Report form in JSX.  |  Opens the report form. |   
+| copyImage()  | none  | none  |  Copy image URL to the user’s clipboard. Display success message to user.|   
+|  handleClickReport() | none  | Report form in JSX.  |  Opens the report form.|   
 
 ### Connections
 - Input:
@@ -173,18 +172,12 @@ Contains text box field for feedbacks and dropdown menu with options to describe
 ### Properties
 |  Name | Type   | Description |  
 |---|---|---|
-| feedbackType  |  String |  Stores the chosen feedback type.
- |
-|  description |  String | Stores the feedback description. Limit to 500 characters.
-  |
+| feedbackType  |  String |  Stores the chosen feedback type. |
+|  description |  String | Stores the feedback description. Limit to 500 characters. |
 ### Functionalities
 |  Name |  Parameters |  Return | Behavior  |
 |---|---|---|---|
-|  handleReport()
- |  String feedbackType, description
- | none
-  | Stores user inputs to database. Display message indicate success.
-  |   
+|  handleReport() |  String feedbackType, description | none | Stores user inputs to database. Display message indicate success.|   
 
 ### Connections
 - Input:
