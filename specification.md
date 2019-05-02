@@ -29,29 +29,34 @@ The LogIn component allows users to log in to their account.
 ### Functionalities
 |  Name |  Parameters |  Return | Behavior  |
 |---|---|---|---|
-| usernameValidation  | username/email  |   |   |   
-|passwordValidation   |password   |   |   |   
-| signIn  |   |   |   |   |
+| usernameValidation  | username/email  | Error message if given an invalid username/email  | Check if username/email is associated with an account  |   
+|passwordValidation   |password   | Error message if given invalid password  | Check if password is correct for given username/email  |   
+| signIn  | username/email and password  | Error message if any field is blank  | Signs user into their account  |   |
 ### Connections
-- Input:
-- Output:
+- Input: User's username and password
+- Output: Message on upper corner of main page signifying user has signed in
 
 ## SignUp
+### Description
+ The Signup component allows the user to create an account. It takes in a username, email, password, and password confirmation to create an account. The SignUp page overlays the main home page when viewed.
 ### Properties
 |  Name | Type   | Description |  
 |---|---|---|
-|   |   |   |
-|   |   |   |
-|   |   |   |   |
+|Username   | TextField  | Unique username to identify user  |
+|Email   |  TextField  |Email to notify user that account was made   |
+|Password   | TextField   |  Password for user login |   |
+| Password confirmation  | TextField   |  Ensure password is what user intend it to be |   |
 ### Functionalities
 |  Name |  Parameters |  Return | Behavior  |
 |---|---|---|---|
-|   |   |   |   |   
-|   |   |   |   |   
-|   |   |   |   |   |
+|  usernameValidation | username  | Error message if not validated  | Checks if username is unique and has at least one character  |   
+|  emailValidation | email  |  Error message if not validated | Checks if email is in proper format based on regex  |   
+|  password Validation | password  |  Error message if not validated | Checks if password has at least 6 characters  |   
+| passwordConfValidation  | password  |  Error message if not validated | Checks if confirmation is the same as password  |   
+| submit  | Above 4 parameters  | Error message if field inputs are incorrect or blank  |  Creates a new user with given information  |   
 ### Connections
-- Input:
-- Output:
+- Input: Takes in user username, email, password and password confirmation.
+- Output: Creates new user account.
 
 ## UploadDialog
 ### Description
