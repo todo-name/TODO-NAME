@@ -6,8 +6,8 @@ The SearchBox component filters for pictures based on tags and titles
 ### Properties
 |  Name | Type   | Description |  
 |---|---|---|
-| query  |  String |  Search term |
-|  searchField |  String | Area to type query  |
+| query  |  TextField |  Search term |
+|  searchField |  TextField | Area to type query  |
 ### Functionalities
 |  Name |  Parameters |  Return | Behavior  |
 |---|---|---|---|
@@ -24,8 +24,8 @@ The LogIn component allows users to log in to their account.
 ### Properties
 |  Name | Type   | Description |  
 |---|---|---|
-|  username_email | String  | User inputs a username   |
-|   password| String  | User inputs password   |
+|  username_email | TextField  | User inputs a username   |
+|   password| TextField  | User inputs password   |
 ### Functionalities
 |  Name |  Parameters |  Return | Behavior  |
 |---|---|---|---|
@@ -44,7 +44,7 @@ The LogIn component allows users to log in to their account.
 |---|---|---|
 |Username   | TextField  | Unique username to identify user  |
 |Email   |  TextField  |Email to notify user that account was made   |
-|Password   | TextField   |  Password for user login |   |
+|Password   | TextField   |  Password for user login |   
 | Password confirmation  | TextField   |  Ensure password is what user intend it to be |   |
 ### Functionalities
 |  Name |  Parameters |  Return | Behavior  |
@@ -70,8 +70,8 @@ The UploadDialog is a dialog component that allows the user to enter a title, ta
 ### Functionalities
 |  Name |  Parameters |  Return | Behavior  |
 |---|---|---|---|
-|show|   |void|Display dialog in center of screen.|   
-|hide|   |void|Hides dialog.|   
+|show| none  |void|Display dialog in center of screen.|   
+|hide|  none |void|Hides dialog.|   
 |uploadPost|title, tags, image|True is upload successful, false otherwise|Takes data from user input fields and uploads it to database. Uses callback to track success of request.|   |
 ### Connections
 - Communicates with the screen to be shown or hidden from view
@@ -89,7 +89,7 @@ The Post component represents a single image, its title, like count, and tag inf
 ### Functionalities
 |  Name |  Parameters |  Return | Behavior  |
 |---|---|---|---|
-|Post   |String, String, Integer, Array ||Constructor. Takes in image path, title, like count, and tags and sets them.   |   
+|Post   |String, String, Integer, Array |none|Constructor. Takes in image path, title, like count, and tags and sets them.   |   
 ### Connections
 - Acts as a pure data storage objects for UI components to access and display.
 
@@ -107,7 +107,7 @@ The PostTile component is the UI representation of a Post. It displays title, im
 ### Functionalities
 |  Name |  Parameters |  Return | Behavior  |
 |---|---|---|---|
-|PostTile |Post   |   |Constructor. Takes the provided Post object and fills UI components with information from the Post object.
+|PostTile |Post   | none  |Constructor. Takes the provided Post object and fills UI components with information from the Post object.
 
 ### Connections
 - Communicates with the screen to be displayed, and with the Post class to retrieve data.
@@ -124,8 +124,8 @@ The Grid is a component that loads and organizes a group of PostTiles in a recta
 ### Functionalities
 |  Name |  Parameters |  Return | Behavior  |
 |---|---|---|---|
-|Grid   |List<Post>   |   |Constructor. Takes a list of post, generates PostTiles, and displays them in a grid.   |   
-|loadPosts   |List<Post>   |void   |Generates and adds PostTiles to the grid based on the provided list of Posts.   |   
+|Grid   |List<Post>   | none  |Constructor. Takes a list of post, generates PostTiles, and displays them in a grid.   |   
+|loadPosts   |List<Post>   |none   |Generates and adds PostTiles to the grid based on the provided list of Posts.   |   
 ### Connections
 - Communicates with the screen to be displayed. Reads information from Post objectiles and creates PostTile components.
 
