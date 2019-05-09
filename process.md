@@ -1,17 +1,18 @@
 ## Process Specification
 
-* How will you communicate with teammates you depend on? Describe specific tools or contexts.
-	> **Facebook Messenger**  
+* How will you communicate with teammates you depend on? Describe specific tools or contexts.  
+
+	**Facebook Messenger**
 	- Use for questions and clarifications.
 	- Use for small updates and notification.  
 
-	> **Github**
+	**Github**
 	- Use for storing code files and project related files.
 
-	> **Google Docs**
-	- Use for group assignments. 
+	**Google Docs**
+	- Use for group assignments.
 
-	> **Google Drive**
+	**Google Drive**
 	- Use to keep track of all homework files.
 
 * What coordination and planning practices will you follow?
