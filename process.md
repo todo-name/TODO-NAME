@@ -15,9 +15,8 @@
 	**Google Drive**
 	- Use to keep track of all homework files.
 
-* What coordination and planning practices will you follow?
-> Identify daily scrums, sprint planning meetings, ad hoc meetings, or other ways of coordinating work.   
-We will meet twice in class weekly, discussing issues in class and then work on these issues outside of class. Meetings outside of class will be done by appointment if necessary. We will update progress on a progress tracker via Google Docs.
+* What coordination and planning practices will you follow? Identify daily scrums, sprint planning meetings, ad hoc meetings, or other ways of coordinating work. 
+> We will meet twice in class weekly, discussing issues in class and then work on these issues outside of class. Meetings outside of class will be done by appointment if necessary. We will update progress on a progress tracker via Google Docs.
 
 * Who will own each of the components in your architecture? Owning them means being responsible for writing them and making sure they are functional and correct.
 > - Stanley will be responsible for making the front-end for the search box, login, and sign up functionalities.
