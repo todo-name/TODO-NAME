@@ -37,4 +37,4 @@
 
 For all of the requirements, how will your verifications be integrated into your process? Will you run automated tests after every build? Before every commit? When will you conduct inspections and who will be involved?
 * Run automated test before every commit. It’s important to make sure every changes to the code still pass tests. 
-Conduct inspections on all requirements and have everyone on the team be involved. These inspections can be done when we combine our parts together to ensure components are integrated correctly.
+* Conduct inspections on all requirements and have everyone on the team be involved. These inspections can be done when we combine our parts together to ensure components are integrated correctly.
