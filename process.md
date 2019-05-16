@@ -15,9 +15,8 @@
 	**Google Drive**
 	- Use to keep track of all homework files.
 
-* What coordination and planning practices will you follow?
-> Identify daily scrums, sprint planning meetings, ad hoc meetings, or other ways of coordinating work.   
-We will meet twice in class weekly, discussing issues in class and then work on these issues outside of class. Meetings outside of class will be done by appointment if necessary. We will update progress on a progress tracker via Google Docs.
+* What coordination and planning practices will you follow? Identify daily scrums, sprint planning meetings, ad hoc meetings, or other ways of coordinating work. 
+> We will meet twice in class weekly, discussing issues in class and then work on these issues outside of class. Meetings outside of class will be done by appointment if necessary. We will update progress on a progress tracker via Google Docs.
 
 * Who will own each of the components in your architecture? Owning them means being responsible for writing them and making sure they are functional and correct.
 > - Stanley will be responsible for making the front-end for the search box, login, and sign up functionalities.
@@ -32,4 +31,4 @@ We will meet twice in class weekly, discussing issues in class and then work on 
 > We will list out tasks that each team member needs to get done on an excel sheet. Each team member will update the status of each task so that everyone knows what point people are on and to check progress. There will be due dates on the tasks and when a task is finished, we will label the task with “done”, our initials, and date. We will also add extra notes about dependencies or possible changes in design by tasks for further communication with teammates.
 
 * What practices will you follow to improve your process if it's not working?
-> Based on our task document/spreadsheet, we can determine when work was started on what component. If our process isn’t working, we will analyze this document and determine what step we went wrong at. Additionally, if team members are struggling with individual assignments, we will communicate with each other during our meetings to ensure that all the work gets done.
+> Based on our task document/spreadsheet, we can determine when work was started on what component. If our process isn’t working, we will analyze this document and determine what step we went wrong at. Additionally, if team members are struggling with individual assignments, we will communicate and help each other during our meetings to ensure that all the work gets done.
