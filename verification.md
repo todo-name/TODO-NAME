@@ -29,7 +29,7 @@
 * Automate test for user input sanitization
 * Automate test to ensure data can be inputted and retrieved
 * Automate test to ensure all data is stored and retrieved in the same format
-##Search
+## Search
 * Verify that when user inputs search term and clicks search icon, the image grid filters for pictures with tag or title that matches input (manual)
 * Verify if user inputs search term that does not match any pictures, a message saying “No matches” appears in the grid area (manual)
 * Verify if user clicks on search icon with no text input in search field, the grid area shows all uploaded pictures (manual)
