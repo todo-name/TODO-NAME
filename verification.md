@@ -1,6 +1,6 @@
 # Requirements to test: 
 
-## SignUp form user input
+## SignUp form 
 * Verify that form will not submit if username, email, password, or passwordconf input fields are empty when the submit button is pressed (automated)
 * Verify that username is unique when form is submitted (automated)
 * Verify password and passwordconf are the same when form is submitted (automated)
@@ -12,6 +12,9 @@
 * Verify password matches the password of the user account in database when submit button is pressed (automated) and signin form disappears as user is signed in successfully (manual)
 * Verify the signin popup form disappears and main page appears after cancel is pressed or user clicks outside the popup (manual)
 * Verify that when user successfully signs in, the signup and signin buttons are replaced with a logout button and a “Hello <username>” message (manual)
+## Signout
+* Verify that when user clicks signout, the signout button is replaced by a register and signin button (manual)
+* Verify user cannot upload image when signed out (manual)
 ## Upload image user input
 * Verify that submitting an image actually uploads it to the db (automated)
 * Verify that the title submitted for a post cannot be more than 150 characters (manual)
