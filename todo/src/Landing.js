@@ -4,6 +4,7 @@ import PostGrid from './PostGrid';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import FirebaseService from './Firebase/firebaseService';
 
 export default class Landing extends Component {
     constructor(props) {
@@ -15,6 +16,9 @@ export default class Landing extends Component {
 
 
     componentDidMount() {
+        let fb = new FirebaseService();
+        fb.getAll().then(val => console.log(val));
+
         // Detect when user logs in or out
         let authUnregFunc = firebase.auth().onAuthStateChanged((firebaseUser) => {
             if (firebaseUser) { //firebaseUser defined: is logged in, redirect from login page to my-project
@@ -24,8 +28,7 @@ export default class Landing extends Component {
             }
         });
     }
-
-
+    
     render() {
         return (
             <div>
