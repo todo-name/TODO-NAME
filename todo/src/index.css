@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+#signupForm, #signinForm, #successRegister {
+  padding: 1em;
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -100px;
+  border:1px solid black;
+  background-color: white;
+}
+
+#passconfirm {
+  display: none
+}
