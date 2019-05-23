@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import UploadDialog from './UploadDialog';
 
 export default class NavBar extends Component {
 
@@ -36,6 +37,7 @@ export default class NavBar extends Component {
         event.preventDefault();
         document.getElementById("signupButton").disabled = false;
         document.getElementById("signinButton").disabled = false;
+
         this.setState({
             display: ''
         })
@@ -46,6 +48,22 @@ export default class NavBar extends Component {
         this.setState({
             display: ''
         })
+    }
+
+    uploadClick = (event) => {
+        event.preventDefault();
+        document.getElementById("signoutButton").disabled = true;
+        document.getElementById("uploadButton").disabled = true;
+        this.setState({ display: 'upload' })
+    }
+
+    cancelClickUpload = (event) => {
+        event.preventDefault();
+        document.getElementById("signoutButton").disabled = false;
+        document.getElementById("uploadButton").disabled = false;
+        this.setState({
+            display: ''
+        });
     }
 
     handleRegister = (event) => {
@@ -60,6 +78,8 @@ export default class NavBar extends Component {
 
     handleSignin = (event) => {
         event.preventDefault();
+        document.getElementById("signupButton").disabled = false;
+        document.getElementById("signinButton").disabled = false;
         firebase.auth().signInWithEmailAndPassword(event.target[0].value, event.target[1].value)
             .then(() => {
                 this.setState({ display: '' , errorMessage: ''})
@@ -68,14 +88,17 @@ export default class NavBar extends Component {
 
     render() {
         let button;
+
         if (this.props.login == false) {
             button = <nav>
                 <button id="signinButton" className="custom-button" onClick={this.signinClick}>Sign In</button>
                 <button id="signupButton" className="custom-button" onClick={this.signupClick}>Sign Up</button>
             </nav>
         } else {
-            button = <button id="signoutButton" className="custom-button" onClick={this.signoutClick}>Sign Out</button>
-            
+            button = <nav>
+                <button id="signoutButton" className="custom-button" onClick={this.signoutClick}>Sign Out</button>
+                <button id="uploadButton" className="custom-button" onClick={this.uploadClick}>Upload</button>
+            </nav>
         }
         return (
             <div>
@@ -91,6 +114,10 @@ export default class NavBar extends Component {
 
                 {this.state.display == 'registersuccess' &&
                     <Successregister cancel={this.cancelClickSuccess} />
+                }
+
+                {this.state.display == 'upload' &&
+                    <UploadDialog cancel={this.cancelClickUpload} />
                 }
             </div >
         )
