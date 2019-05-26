@@ -52,9 +52,13 @@ export default class NavBar extends Component {
         event.preventDefault();
         if (event.target[1].value != event.target[2].value) {
             document.getElementById('passconfirm').style.display = "block";
+            this.setState({ errorMessage: '' })
         } else {
+            document.getElementById('passconfirm').style.display = "none";
             firebase.auth().createUserWithEmailAndPassword(event.target[0].value, event.target[1].value)
-            this.setState({ display: 'registersuccess' })
+                .then(() => {
+                    this.setState({ display: 'registersuccess', errorMessage: '' })
+                }).catch(err => this.setState({ errorMessage: err.message }))
         }
     }
 
@@ -86,7 +90,7 @@ export default class NavBar extends Component {
                 }
 
                 {this.state.display == 'signup' &&
-                    <Signupform button={this.handleRegister} cancel={this.cancelClick} />
+                    <Signupform button={this.handleRegister} cancel={this.cancelClick} error={this.state.errorMessage}/>
                 }
 
                 {this.state.display == 'registersuccess' &&
@@ -141,8 +145,9 @@ class Signupform extends Component {
                         <input type="password" id="confirm" className="text-input" name="passwordconf" required="required" />
                     </div>
                     <div id='passconfirm'>
-                        <p>Password and password confirmation do not match</p>
+                        <p>Invalid password confirmation</p>
                     </div>
+                    <p>{this.props.error}</p>
                     <div className="button">
                         <button type="submit" >Register</button>
                         <button type='button' className="custom-button" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
