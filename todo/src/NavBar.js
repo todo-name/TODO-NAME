@@ -86,34 +86,42 @@ export default class NavBar extends Component {
         document.getElementById("signinButton").disabled = false;
         firebase.auth().signInWithEmailAndPassword(event.target[0].value, event.target[1].value)
             .then(() => {
-                this.setState({ display: '' , errorMessage: ''})
-            }).catch(err => this.setState({ errorMessage: err.message }));   
+                this.setState({ display: '', errorMessage: '' })
+            }).catch(err => this.setState({ errorMessage: err.message }));
     }
 
     render() {
         let button;
 
         if (this.props.login == false) {
-            button = <nav>
-                <button id="signinButton" className="custom-button" onClick={this.signinClick}>Sign In</button>
-                <button id="signupButton" className="custom-button" onClick={this.signupClick}>Sign Up</button>
-            </nav>
+            button =
+                <form class="form-inline form-right">
+                    <button id="signinButton" className="custom-button btn btn-primary" onClick={this.signinClick}>Sign In</button>
+                    <button id="signupButton" className="custom-button btn btn-primary" onClick={this.signupClick}>Sign Up</button>
+                </form>
         } else {
-            button = <nav>
-                <button id="signoutButton" className="custom-button" onClick={this.signoutClick}>Sign Out</button>
-                <button id="uploadButton" className="custom-button" onClick={this.uploadClick}>Upload</button>
-            </nav>
+            button =
+                <form class="form-inline form-right">
+                    <button id="uploadButton" className="custom-button btn btn-primary" onClick={this.uploadClick}>Upload</button>
+                    <button id="signoutButton" className="custom-button btn btn-primary" onClick={this.signoutClick}>Sign Out</button>
+                </form>
         }
         return (
             <div>
-                {button}
+                <nav class="navbar navbar-light bg-light">
+                    <form class="form-inline form-left">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                    {button}
+                </nav>
 
                 {this.state.display == 'signin' &&
-                    <Signinform button={this.handleSignin} cancel={this.cancelClick} error={this.state.errorMessage}/>
+                    <Signinform button={this.handleSignin} cancel={this.cancelClick} error={this.state.errorMessage} />
                 }
 
                 {this.state.display == 'signup' &&
-                    <Signupform button={this.handleRegister} cancel={this.cancelClick} error={this.state.errorMessage}/>
+                    <Signupform button={this.handleRegister} cancel={this.cancelClick} error={this.state.errorMessage} />
                 }
 
                 {this.state.display == 'registersuccess' &&
