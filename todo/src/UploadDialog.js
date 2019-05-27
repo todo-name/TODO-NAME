@@ -28,7 +28,7 @@ export default class UploadDialog extends Component {
                     <p>{this.props.error}</p>
                     <div className="button">
                         <button type="submit" className="custom-button" >Post</button>
-                        <button type='button' className="custom-button" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
+                        <button type='button' className="custom-button form-right-button" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
                     </div>
                 </form>
             </div>

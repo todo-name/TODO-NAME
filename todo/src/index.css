@@ -36,6 +36,11 @@ code {
   right: 5px;
 }
 
+.form-right-button{
+  position: relative;
+  left: 1em;
+}
+
 @media (min-width: 768px) {
   .form-left {
     margin: auto;
@@ -45,4 +50,15 @@ code {
     position: relative;
     right: 5em;
   }
+}
+
+@media (min-width: 300px) and (max-width: 576px) {
+  .search {
+    position: relative;
+    left: 5px;
+  }
+  .form-inline {
+    margin: auto;
+  }
+
 }

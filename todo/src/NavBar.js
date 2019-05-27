@@ -108,10 +108,10 @@ export default class NavBar extends Component {
         }
         return (
             <div>
-                <nav class="navbar navbar-light bg-light">
-                    <form class="form-inline form-left">
+                <nav class="navbar navbar-light bg-light sticky-top">
+                    <form class="form-inline form-left flex-nowrap">
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0 search" type="submit">Search</button>
                     </form>
                     {button}
                 </nav>
@@ -153,7 +153,7 @@ class Signinform extends Component {
                     <p>{this.props.error}</p>
                     <div className="button">
                         <button type="submit" className="custom-button" >Sign In</button>
-                        <button type='button' className="custom-button" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
+                        <button type='button' className="custom-button form-right-button" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
                     </div>
                 </form>
             </div>
@@ -184,8 +184,8 @@ class Signupform extends Component {
                     </div>
                     <p>{this.props.error}</p>
                     <div className="button">
-                        <button type="submit" >Register</button>
-                        <button type='button' className="custom-button" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
+                        <button type="submit" className="custom-button">Register</button>
+                        <button type='button' className="custom-button form-right-button" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
                     </div>
                 </form>
             </div>
