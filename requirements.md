@@ -62,26 +62,27 @@ put in the left most column.
 ## Sign Up / Sign In / Sign Out
 - The "Sign In" button is displayed on the top of the screen to the right of the search bar when the user is signed out.
 - The signup button is displayed on the top right of the screen to the right of the "Sign In" button when the user is signed out.
-- Upon clicking the signup button, a popup screen that overlays the main screen is shown with 4 input text fields labeled username, email, password, and confirm password aligned vertically.
-- At the bottom of the signup screen are two buttons located side by side with each other named cancel and submit.
-- To exit the signup screen and return to the main page, either click on the cancel button or click anywhere outside the popup screen.
-- If submit button is clicked on and any of the 4 text fields are missing user input, an error message is shown between the bottom of the last text form and the buttons that says “There are incomplete required fields.”
-- If user submits a username that has been taken, an error message will show right above the username textarea that says “Username taken”
-- If user submits a email that does not match email validation regex expression, an error message will show right above the email textarea that says “Invalid email”.
-- If user submits a password that has fewer than 6 characters, an error message will show right above the password textarea that says “Invalid password”
-- If user submits a password confirmation that does not match the password input, an error message will show right above the password confirmation textarea that says “Invalid password confirmation”.
-- If there are no errors in all input forms and submit is clicked on, a new user is created and user is redirected to the sign-in page.
+- Upon clicking the signup button, a popup screen that overlays the main screen is shown with 3 input text fields labeled email, password, and confirm password aligned vertically.
+- At the bottom of the signup screen are two buttons located side by side of each other named 'Cancel' and 'Register'.
+- To exit the signup screen and return to the main page, click on the 'Cancel' button.
+- If register button is clicked on and any of the 3 text fields are missing user input, an error message is shown underneath the empty text field that says “This is a required field.”
+- If user submits an email that has been taken, an error message will show below the textfields that says “The email address is already in use by another account.”
+- If user submits an email that does not match email validation regex expression, an error message will show right below the email textarea that says “You must enter a valid email address”.
+- If user submits a password that has fewer than 6 characters, an error message will show right below the password textarea that says “You must use this format: six or more characters”
+- If user submits a password confirmation that does not match the password input, an error message will show below the password confirmation textarea that says “Invalid password confirmation”.
+- If there are no errors in all input forms and register is clicked on, a new user is created, a message verifying the account has been created will appear as a popup (can be closed by clicking 'close' button), and user is automatically signed into their account
 - Sign-in page is a popup screen that overlays the main page.
-- The sign in page is accessed by clicking on the sign in button or from being redirected from the signup page
-- The sign in page must have 2 textareas aligned vertically with the first one labeled username/email and the second one labeled password.
-- The bottom of the sign in page has 2 buttons aligned horizontally named Cancel and Submit.
-- Upon pressing the Cancel button or clicking outside the sign in page, the user will exit the sign in page and return to the main page.
-- When the user clicks on submit and username/email is invalid, a message will show above the username/email textarea saying “Invalid username/email”.
-- When the user clicks on submit and username/email is valid but password is invalid, a message will show above the password textarea saying “Invalid password”.
-- When the user clicks on submit and the inputted username/email and password are valid, the user is signed in and redirected to the main page and a message saying “Hello {username}” is displayed on the top right of the page.
+- The sign in page is accessed by clicking on the sign in button
+- The sign in page must have 2 textareas aligned vertically with the first one labeled 'email' and the second one labeled 'password'.
+- The bottom of the sign in page has 2 buttons aligned horizontally named Cancel and Sign In.
+- Upon pressing the Cancel button, the user will exit the sign in page and return to the main page.
+- When the user clicks on Sign In and email is invalid, a message will show below the email textarea saying “You must enter a valid email address”.
+- When user clicks Sign In and email is valid but that email has not been registered, a message saying "There is no user record corresponding to this identifier. The user may heave been deleted." will show below the password textarea.
+- When the user clicks on submit and email is valid but password is invalid, a message will show below the password textarea saying “The password is invalid or the user does not have a password”.
+- When the user clicks on submit and the inputted email and password are valid, the user is signed in and redirected to the main page.
 - A signed in user is able to post and like pictures.
 - When the user is signed in, the sign in and sign up button disappear and a sign out button appears to the right of the search bar.
-- When the user clicks on the sign out button, the user is signed out and the message “Hello {username}” disappears and the sign in and sign up appear in their original positions.
+- When the user clicks on the sign out button, the user is signed out and the sign in and sign up appear in their original positions.
 - A signed out user is unable to post and like pictures.
 
 ## Mobile Look / Responsiveness

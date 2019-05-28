@@ -21,7 +21,7 @@ export default class Landing extends Component {
 
         // Detect when user logs in or out
         let authUnregFunc = firebase.auth().onAuthStateChanged((firebaseUser) => {
-            if (firebaseUser) { //firebaseUser defined: is logged in, redirect from login page to my-project
+            if (firebaseUser) { //firebaseUser defined: is logged in
                 this.setState({ login: true });
             } else { //firebaseUser undefined: is not logged in
                 this.setState({ login: false })

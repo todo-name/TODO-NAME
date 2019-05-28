@@ -3,6 +3,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import Button from '@material-ui/core/Button';
+import UploadDialog from './UploadDialog';
 
 export default class NavBar extends Component {
 
@@ -36,6 +37,7 @@ export default class NavBar extends Component {
         event.preventDefault();
         document.getElementById("signupButton").disabled = false;
         document.getElementById("signinButton").disabled = false;
+
         this.setState({
             display: ''
         })
@@ -48,49 +50,86 @@ export default class NavBar extends Component {
         })
     }
 
+    uploadClick = (event) => {
+        event.preventDefault();
+        document.getElementById("signoutButton").disabled = true;
+        document.getElementById("uploadButton").disabled = true;
+        this.setState({ display: 'upload' })
+    }
+
+    cancelClickUpload = (event) => {
+        event.preventDefault();
+        document.getElementById("signoutButton").disabled = false;
+        document.getElementById("uploadButton").disabled = false;
+        this.setState({
+            display: ''
+        });
+    }
+
     handleRegister = (event) => {
         event.preventDefault();
         if (event.target[1].value != event.target[2].value) {
             document.getElementById('passconfirm').style.display = "block";
+            this.setState({ errorMessage: '' })
         } else {
+            document.getElementById('passconfirm').style.display = "none";
             firebase.auth().createUserWithEmailAndPassword(event.target[0].value, event.target[1].value)
-            this.setState({ display: 'registersuccess' })
+                .then(() => {
+                    this.setState({ display: 'registersuccess', errorMessage: '' })
+                }).catch(err => this.setState({ errorMessage: err.message }))
         }
     }
 
     handleSignin = (event) => {
         event.preventDefault();
+        document.getElementById("signupButton").disabled = false;
+        document.getElementById("signinButton").disabled = false;
         firebase.auth().signInWithEmailAndPassword(event.target[0].value, event.target[1].value)
             .then(() => {
-                this.setState({ display: '' , errorMessage: ''})
-            }).catch(err => this.setState({ errorMessage: err.message }));   
+                this.setState({ display: '', errorMessage: '' })
+            }).catch(err => this.setState({ errorMessage: err.message }));
     }
 
     render() {
         let button;
+
         if (this.props.login == false) {
-            button = <nav>
-                <Button id="signinButton" className="custom-button" variant='contained' color='primary' onClick={this.signinClick} >Sign In</Button>
-                <Button id="signupButton" className="custom-button" variant='outlined' color='secondary' onClick={this.signupClick}>Sign Up</Button>
-            </nav>
+            button =
+                <form class="form-inline form-right">
+                    <button id="signinButton" className="custom-button btn btn-primary" onClick={this.signinClick}>Sign In</button>
+                    <button id="signupButton" className="custom-button btn btn-primary" onClick={this.signupClick}>Sign Up</button>
+                </form>
         } else {
-            button = <Button id="signoutButton" className="custom-button" variant='contained' onClick={this.signoutClick}>Sign Out</Button>
-            
+            button =
+                <form class="form-inline form-right">
+                    <button id="uploadButton" className="custom-button btn btn-primary" onClick={this.uploadClick}>Upload</button>
+                    <button id="signoutButton" className="custom-button btn btn-primary" onClick={this.signoutClick}>Sign Out</button>
+                </form>
         }
         return (
             <div>
-                {button}
+                <nav class="navbar navbar-light bg-light sticky-top">
+                    <form class="form-inline form-left flex-nowrap">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
+                        <button class="btn btn-outline-success my-2 my-sm-0 search" type="submit">Search</button>
+                    </form>
+                    {button}
+                </nav>
 
                 {this.state.display == 'signin' &&
-                    <Signinform button={this.handleSignin} cancel={this.cancelClick} error={this.state.errorMessage}/>
+                    <Signinform button={this.handleSignin} cancel={this.cancelClick} error={this.state.errorMessage} />
                 }
 
                 {this.state.display == 'signup' &&
-                    <Signupform button={this.handleRegister} cancel={this.cancelClick} />
+                    <Signupform button={this.handleRegister} cancel={this.cancelClick} error={this.state.errorMessage} />
                 }
 
                 {this.state.display == 'registersuccess' &&
                     <Successregister cancel={this.cancelClickSuccess} />
+                }
+
+                {this.state.display == 'upload' &&
+                    <UploadDialog cancel={this.cancelClickUpload} />
                 }
             </div >
         )
@@ -114,7 +153,7 @@ class Signinform extends Component {
                     <p>{this.props.error}</p>
                     <div className="button">
                         <button type="submit" className="custom-button" >Sign In</button>
-                        <button type='button' className="custom-button" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
+                        <button type='button' className="custom-button form-right-button" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
                     </div>
                 </form>
             </div>
@@ -141,11 +180,12 @@ class Signupform extends Component {
                         <input type="password" id="confirm" className="text-input" name="passwordconf" required="required" />
                     </div>
                     <div id='passconfirm'>
-                        <p>Password and password confirmation do not match</p>
+                        <p>Invalid password confirmation</p>
                     </div>
+                    <p>{this.props.error}</p>
                     <div className="button">
-                        <button type="submit" >Register</button>
-                        <button type='button' className="custom-button" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
+                        <button type="submit" className="custom-button">Register</button>
+                        <button type='button' className="custom-button form-right-button" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
                     </div>
                 </form>
             </div>
