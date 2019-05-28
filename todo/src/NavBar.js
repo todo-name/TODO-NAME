@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import Button from '@material-ui/core/Button';
 
 export default class NavBar extends Component {
 
@@ -15,15 +16,14 @@ export default class NavBar extends Component {
 
     signupClick = (event) => {
         event.preventDefault();
-        document.getElementById("signinButton").disabled = true;
         document.getElementById("signupButton").disabled = true;
         this.setState({ display: 'signup' })
     }
 
     signinClick = (event) => {
         event.preventDefault();
-        document.getElementById("signupButton").disabled = true;
         document.getElementById("signinButton").disabled = true;
+        document.getElementById("signupButton").disabled = false;
         this.setState({ display: 'signin' })
     }
 
@@ -70,11 +70,11 @@ export default class NavBar extends Component {
         let button;
         if (this.props.login == false) {
             button = <nav>
-                <button id="signinButton" className="custom-button" onClick={this.signinClick}>Sign In</button>
-                <button id="signupButton" className="custom-button" onClick={this.signupClick}>Sign Up</button>
+                <Button id="signinButton" className="custom-button" variant='contained' color='primary' onClick={this.signinClick} >Sign In</Button>
+                <Button id="signupButton" className="custom-button" variant='outlined' color='secondary' onClick={this.signupClick}>Sign Up</Button>
             </nav>
         } else {
-            button = <button id="signoutButton" className="custom-button" onClick={this.signoutClick}>Sign Out</button>
+            button = <Button id="signoutButton" className="custom-button" variant='contained' onClick={this.signoutClick}>Sign Out</Button>
             
         }
         return (
