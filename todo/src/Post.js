@@ -6,6 +6,7 @@ import copy from './img/copy.png';
 import mark from './img/exclamation.png';
 import { Dialog, DialogContent, DialogActions } from '@material-ui/core/';
 
+import heart from './img/heart.png';
 
 const paperStyle = {
 	width: 100,
@@ -13,13 +14,27 @@ const paperStyle = {
 };
 
 export default class Post extends Component {
+	like = (event) => {
+		// API call to like
+	}
 
 	render() {
+		const styles = {
+			postHeader: {
+				display: "flex",
+				flexDirection: "row",
+				justifyContent: "space-between"
+			}
+		}
+
 		return(
 			<Grid item>
 				<Paper style={paperStyle}>
-					{this.props.post.text}
-				<Menu />
+					<div style={styles.postHeader}>
+						{this.props.post.text}
+						<Menu />
+					</div>
+				<img src={heart} width={24} height={24} onClick={this.like}></img>
 				</Paper>
 			</Grid>
 			)
