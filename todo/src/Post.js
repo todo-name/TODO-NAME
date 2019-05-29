@@ -4,6 +4,9 @@ import Paper from '@material-ui/core/Paper';
 import Dots from './img/dots.png';
 import copy from './img/copy.png';
 import mark from './img/exclamation.png';
+import { Dialog, DialogContent, DialogActions } from '@material-ui/core/';
+
+
 const paperStyle = {
 	width: 100,
 	height: 140
@@ -24,7 +27,15 @@ export default class Post extends Component {
 }
 
 class Menu extends Component {
-
+	constructor(props) {
+		super(props);
+		this.state = {}
+	}
+	clickReport = () => {
+		this.setState({
+			open: !this.state.open,
+		})
+	}
 	render() {
 		const styles = {
 			icon: {
@@ -39,12 +50,45 @@ class Menu extends Component {
 						<img src={copy} style={styles.icon}></img>
 						Copy Link
 					</a>
-					<a class="dropdown-item" href="#">
+					<a class="dropdown-item" href="#" onClick={this.clickReport}>
 						<img src={mark} style={styles.icon}></img>
 						Report
 					</a>
+					<Report open={this.state.open} click={this.clickReport} />
 				</div>
 			</div>
 		)
 	}
+}
+
+class Report extends Component {
+    render() {
+		const types = ['Not a dog', 'Not cute', 'Inaccpropriate', 'A cat', 'Other']
+        return (
+            <Dialog
+                open={this.props.open}
+                onClose={this.props.click}
+                scroll='paper'
+                fullWidth='false'
+                maxWidth='sm'
+                aria-labelledby="scroll-dialog-title"
+            >
+                <DialogContent>
+					<select>
+						{
+							types.map((type) => {
+								return (
+									<option value={type}>{type}</option>
+								)
+							})
+						}
+					</select>
+					<textarea id="report-description" type="text" placeholder="Tell us more..." maxLength="500"></textarea>
+                </DialogContent>
+                <DialogActions>
+					<button className="btn btn-primary" type="button" onClick={this.props.click}>Report</button>
+                </DialogActions>
+            </Dialog>
+        )
+    }
 }

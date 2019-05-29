@@ -97,7 +97,7 @@ export default class NavBar extends Component {
             button =
                 <form class="form-inline form-right">
                     <button id="signinButton" className="custom-button btn btn-primary" onClick={this.signinClick}>Sign In</button>
-                    <button id="signupButton" className="custom-button btn btn-primary" onClick={this.signupClick}>Sign Up</button>
+                    <button id="signupButton" className="custom-button btn btn-outline-secondary" onClick={this.signupClick}>Sign Up</button>
                 </form>
         } else {
             button =
