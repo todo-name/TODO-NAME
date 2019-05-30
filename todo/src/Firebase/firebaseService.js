@@ -28,4 +28,14 @@ export default class FirebaseService {
             }
         );
     }
+
+    getRecent() {
+        return this.getAll().then(data => {
+            return data.sort((a, b) => {
+                let dateA = new Date(a.time_posted); 
+                let dateB = new Date(b.time_posted);
+                return dateA > dateB ? -1 : dateA < dateB ? 1 : 0; 
+            });
+        });
+    }
 }
