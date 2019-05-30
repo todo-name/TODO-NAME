@@ -9,21 +9,31 @@ export default class FirebaseService {
         return this.db.add(data);
     }
 
-    get(name) {
-        let data = []
-        return this.db.where("pid", "==", name).get().then(
+    flag(post) {
+        this.db.doc(post.keys[0]).set({
+            flagged: true
+        }, {merge: true});
+    }
+
+    get(pid) {
+        let data = {}
+        return this.db.where("pid", "==", pid).get().then(
             snapshot => {
-                snapshot.forEach(snap => data.push({[snap.id]: snap.data()}));
+                snapshot.forEach(snap => data[snap.id] = snap.data());
                 return data;
             }
         );
     }
 
     getAll() {
-        let data = []
+        let data = {}
         return this.db.get().then(
             snapshot => {
-                snapshot.forEach(snap => data.push({[snap.id]: snap.data()}));
+                let i = 0;
+                snapshot.forEach(snap => {
+                    data[snap.id] = snap.data();
+                    i++;
+                });
                 return data;
             }
         );
