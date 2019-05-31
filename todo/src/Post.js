@@ -9,11 +9,15 @@ import { Dialog, DialogContent, DialogActions } from '@material-ui/core/';
 import heart from './img/heart.png';
 
 const paperStyle = {
-	width: 100,
-	height: 140
+	width: 300,
+	height: 300,
+	padding: 8,
+	display:"flex",
+	flexDirection: "column",
 };
 
 export default class Post extends Component {
+
 	like = (event) => {
 		// API call to like
 	}
@@ -24,16 +28,36 @@ export default class Post extends Component {
 				display: "flex",
 				flexDirection: "row",
 				justifyContent: "space-between"
-			}
+			},
+		};
+		const cellStyle = {
+			display: "flex", 
+			flex: 1, 
+			minHeight: 0, 
+			background: "black",
+			marginTop: 8,
+			marginBottom: 8
+		};
+		const imageStyle = { maxWidth: "100%" };
+
+		let postImage = null;
+		if(this.props.post.url.endsWith(".gifv")){
+			let videourl = this.props.post.url.replace(".gifv", ".mp4");
+			postImage = <video src={videourl} style={imageStyle} autoPlay={true} />;
+		} else {
+			postImage = <img crossOrigin="" style={imageStyle} src={this.props.post.url} ></img>;
 		}
 
 		return(
 			<Grid item>
 				<Paper style={paperStyle}>
 					<div style={styles.postHeader}>
-						{this.props.post.text}
+						{this.props.post.desc}
 						<Menu />
 					</div>
+				<div style={cellStyle}>
+					{postImage}
+				</div>
 				<img src={heart} width={24} height={24} onClick={this.like}></img>
 				</Paper>
 			</Grid>
@@ -78,7 +102,7 @@ class Menu extends Component {
 
 class Report extends Component {
     render() {
-		const types = ['Not a dog', 'Not cute', 'Inaccpropriate', 'A cat', 'Other']
+		const types = ['Not a dog', 'Not cute', 'Inappropriate', 'A cat', 'Other']
         return (
             <Dialog
                 open={this.props.open}
