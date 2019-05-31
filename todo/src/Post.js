@@ -40,19 +40,23 @@ export default class Post extends Component {
 		};
 		const imageStyle = { maxWidth: "100%" };
 
+		let post = this.props.post;
+		let key = Object.keys(post)[0];
+		let postData = post[key];
+
 		let postImage = null;
-		if(this.props.post.url.endsWith(".gifv")){
-			let videourl = this.props.post.url.replace(".gifv", ".mp4");
-			postImage = <video src={videourl} style={imageStyle} autoPlay={true} />;
+		if(postData.url.endsWith(".gifv")){
+			let videourl = postData.url.replace(".gifv", ".mp4");
+			postImage = <video src={videourl} style={imageStyle} autoPlay />;
 		} else {
-			postImage = <img crossOrigin="" style={imageStyle} src={this.props.post.url} ></img>;
+			postImage = <img crossOrigin="" style={imageStyle} src={postData.url} ></img>;
 		}
 
 		return(
 			<Grid item>
 				<Paper style={paperStyle}>
 					<div style={styles.postHeader}>
-						{this.props.post.desc}
+						{postData.desc}
 						<Menu />
 					</div>
 				<div style={cellStyle}>

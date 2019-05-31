@@ -9,9 +9,15 @@ export default class FirebaseService {
         return this.db.add(data);
     }
 
-    get(name) {
-        let data = []
-        return this.db.where("pid", "==", name).get().then(
+    flag(post) {
+        this.db.doc(post[0].keys[0]).set({
+            flagged: true
+        }, {merge: true});
+    }
+
+    get(pid) {
+        let data = {}
+        return this.db.where("pid", "==", pid).get().then(
             snapshot => {
                 snapshot.forEach(snap => data.push({[snap.id]: snap.data()}));
                 return data;
@@ -27,5 +33,15 @@ export default class FirebaseService {
                 return data;
             }
         );
+    }
+
+    getRecent() {
+        return this.getAll().then(data => {
+            return data.sort((a, b) => {
+                let dateA = new Date(a.time_posted); 
+                let dateB = new Date(b.time_posted);
+                return dateA > dateB ? -1 : dateA < dateB ? 1 : 0; 
+            });
+        });
     }
 }

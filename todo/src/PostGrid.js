@@ -1,27 +1,24 @@
 import React, { Component } from 'react';
 import Post from './Post';
 import Grid from '@material-ui/core/Grid';
-import FirebaseService from './Firebase/firebaseService';
+import firebaseService from './Firebase/firebaseService';
 
 export default class PostGrid extends Component {
-	constructor(){
+	constructor() {
 		super();
-		this.state = { posts:[] };
+		this.state = {
+			postsData: []
+		}
+		this.fb = new firebaseService();
 	}
-
 	componentDidMount(){
-		let posts = [];
-
-        let fb = new FirebaseService();
-        fb.getAll().then((val) => {
-        	for(var prop in val){
-        		let post = val[prop]
-        		let key = Object.keys(post)[0];
-        		let postData = post[key];
-        		posts.push(postData);
-        	}
-        	this.setState({posts: posts});
-        });
+		this.getRecentPosts();
+	}
+	getRecentPosts() {
+		this.fb.getRecent().then(data => {
+			this.setState({postsData: data});
+			console.log(this.state.postsData);
+		})
 	}
 
 	render() {
@@ -40,7 +37,7 @@ export default class PostGrid extends Component {
   				}}
     			>
     		    
-    		    {this.state.posts.map((post, i) => (
+    		    {this.state.postsData.map((post, i) => (
     				<Post key={i} post={post}/>
     			))}
 
