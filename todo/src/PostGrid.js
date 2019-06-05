@@ -15,8 +15,7 @@ export default class PostGrid extends Component {
     			direction="row"
     			justify="center"
     			alignItems="center"
-    			>
-    		    
+    		>
     		    {postsData.map((postData, i) => (
     				<Post key={i} post={postData}/>
     			))}

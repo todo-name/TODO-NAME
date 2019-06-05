@@ -8,10 +8,6 @@ import { Dialog, DialogContent, DialogActions } from '@material-ui/core/';
 
 import heart from './img/heart.png';
 
-const paperStyle = {
-	width: 100,
-	height: 140
-};
 
 export default class Post extends Component {
 	like = (event) => {
@@ -20,6 +16,10 @@ export default class Post extends Component {
 
 	render() {
 		const styles = {
+			paperStyle: {
+				width: "100%",
+				height: 140
+			},
 			postHeader: {
 				display: "flex",
 				flexDirection: "row",
@@ -29,7 +29,7 @@ export default class Post extends Component {
 
 		return(
 			<Grid item>
-				<Paper style={paperStyle}>
+				<Paper style={styles.paperStyle}>
 					<div style={styles.postHeader}>
 						{this.props.post.text}
 						<Menu />
