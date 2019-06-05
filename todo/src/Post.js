@@ -39,6 +39,8 @@ export default class Post extends Component {
 			marginBottom: 8
 		};
 		const imageStyle = { maxWidth: "100%" };
+		const likeStyle = { display: "flex", flexDirection: "row", alignContent: "center" };
+		const likeCounterStyle = { marginLeft: 8 };
 
 		let post = this.props.post;
 		let key = Object.keys(post)[0];
@@ -47,7 +49,7 @@ export default class Post extends Component {
 		let postImage = null;
 		if(postData.url.endsWith(".gifv")){
 			let videourl = postData.url.replace(".gifv", ".mp4");
-			postImage = <video src={videourl} style={imageStyle} autoPlay />;
+			postImage = <video src={videourl} style={imageStyle} autoPlay muted />;
 		} else {
 			postImage = <img crossOrigin="" style={imageStyle} src={postData.url} ></img>;
 		}
@@ -59,10 +61,13 @@ export default class Post extends Component {
 						{postData.desc}
 						<Menu />
 					</div>
-				<div style={cellStyle}>
-					{postImage}
-				</div>
-				<img src={heart} width={24} height={24} onClick={this.like}></img>
+					<div style={cellStyle}>
+						{postImage}
+					</div>
+					<div style={likeStyle}>
+						<img src={heart} width={24} height={24} onClick={this.like}></img>
+						<div style={likeCounterStyle}> {postData.likes}</div>
+					</div>
 				</Paper>
 			</Grid>
 			)
