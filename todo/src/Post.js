@@ -59,32 +59,22 @@ export default class Post extends Component {
 
 	render() {
 		const styles = {
-			paperStyle: {
-				width: "100%",
-				height: 140
-			},
 			postHeader: {
 				display: "flex",
 				flexDirection: "row",
 				justifyContent: "space-between"
 			},
-			cellStyle: {
-				display: "flex", 
-				flex: 1, 
-				minHeight: 0, 
-				background: "black",
-				marginTop: 8,
-				marginBottom: 8
-			},
-			like: {
-				display: "flex", 
-				flexDirection: "row", 
-				alignContent: "center"
-			}
 		};
-
+		const cellStyle = {
+			display: "flex", 
+			flex: 1, 
+			minHeight: 0, 
+			background: "black",
+			marginTop: 8,
+			marginBottom: 8
+		};
 		const imageStyle = { maxWidth: "100%", objectFit: "contain" };
-		const likeStyle = {  };
+		const likeStyle = { display: "flex", flexDirection: "row", alignContent: "center" };
 		const likeCounterStyle = { marginLeft: 8 };
 
 		let post = this.props.post;
@@ -101,17 +91,17 @@ export default class Post extends Component {
 
 		return(
 			<Grid item>
-				<Paper style={styles.paperStyle}>
+				<Paper style={paperStyle}>
 					<div style={styles.postHeader}>
 						{postData.desc}
 						<Menu auth={this.props.auth} fb={this.props.fb}/>
 					</div>
-					<div style={styles.cellStyle}>
+					<div style={cellStyle}>
 						{postImage}
 					</div>
-					{this.props.auth.checkLoggedIn() ? <div style={styles.like}>
-						<img src={heart} width={24} height={24} onClick={this.like} 
-								style={this.state.liked ? {backgroundColor: "red"}: {}}></img>
+					{this.props.auth.checkLoggedIn() ? <div style={likeStyle}>
+						<img src={this.state.liked ? redHeart : heart} width={24} height={24} onClick={this.like}
+								style={{cursor: "pointer"}}></img>
 						<div style={likeCounterStyle}> {this.state.likes}</div>
 					</div> : undefined}
 				</Paper>
