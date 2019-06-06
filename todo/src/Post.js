@@ -6,7 +6,9 @@ import copy from './img/copy.png';
 import mark from './img/exclamation.png';
 import { Dialog, DialogContent, DialogActions } from '@material-ui/core/';
 
-import heart from './img/heart.png';
+import heart from './img/like.svg';
+import redHeart from './img/red_like.svg';
+import { throwStatement } from '@babel/types';
 
 const paperStyle = {
 	width: 300,
@@ -45,7 +47,14 @@ export default class Post extends Component {
 					liked: true
 				});
 			});
-		}
+		} else {
+			this.props.fb.unlikePost(this.props.post, this.props.auth.getUser()).then(results => {
+				this.setState({
+					likes: results,
+					liked: false
+				})
+			})
+		} 
 	}
 
 	render() {

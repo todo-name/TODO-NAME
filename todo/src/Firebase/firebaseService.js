@@ -43,7 +43,6 @@ export default class FirebaseService {
             let doc = this.db.doc(key)
             doc.get().then(snapshot => {
                 likes = snapshot.data().likes + 1;
-                console.log(likes); 
                 doc.set({
                     likes: likes
                 }, {merge: true})
@@ -53,6 +52,25 @@ export default class FirebaseService {
                         "uid": uid
                     }).then(() => resolve(likes))
                 });
+            });
+        });
+    }
+
+    unlikePost(post, uid) {
+        return new Promise((resolve, reject) => {
+            let likes;
+            let key = Object.keys(post)[0];
+            let doc = this.db.doc(key)
+            doc.get().then(snapshot => {
+                likes = snapshot.data().likes - 1;
+                doc.set({
+                    likes: likes
+                }, {merge: true})
+                .then(() => {
+                    this.pldb.where("pid", "==", key).where("uid", "==", uid).get().then(snapshots => {
+                        this.pldb.doc(snapshots.docs[0].id).delete().then(() => resolve(likes));
+                    })
+                })
             });
         });
     }
