@@ -85,7 +85,7 @@ export default class Post extends Component {
 		let postImage = null;
 		if(postData.url.endsWith(".gifv")){
 			let videourl = postData.url.replace(".gifv", ".mp4");
-			postImage = <video src={videourl} style={imageStyle} autoPlay muted />;
+			postImage = <video src={videourl} style={imageStyle} autoPlay muted loop/>;
 		} else {
 			postImage = <img crossOrigin="" style={imageStyle} src={postData.url} ></img>;
 		}
