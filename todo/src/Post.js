@@ -38,7 +38,7 @@ export default class Post extends Component {
 			marginTop: 8,
 			marginBottom: 8
 		};
-		const imageStyle = { maxWidth: "100%" };
+		const imageStyle = { maxWidth: "100%", objectFit: "contain" };
 		const likeStyle = { display: "flex", flexDirection: "row", alignContent: "center" };
 		const likeCounterStyle = { marginLeft: 8 };
 

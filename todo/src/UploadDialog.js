@@ -14,26 +14,37 @@ export default class UploadDialog extends Component {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", apiUrl);
         xhr.setRequestHeader("Authorization", "Client-ID " + apiKey);
+
+        let firebase = this.fb;
+
         xhr.onload = function() {
-        	console.log(xhr.response);
-        	if(xhr.response.status == 200){
-        		let imgurData = xhr.responseText.data;
+        	if(xhr.status == 200){
+        		let imgurData = JSON.parse(xhr.responseText).data;
+        		console.log(imgurData);
+
         		let data = {
-        			pid: "",
         			desc: title,
         			flagged: false,
         			likes: 0,
-        			time_posted: new Date(),
+        			time_posted: new Date(imgurData.datetime * 1000),
         			title: "",
         			uid: "",
         			url: imgurData.link
         		};
-        		this.fb.add(data);
-        	}
+
+        		firebase.add(data).then(function(docRef) {
+        			console.log("Document written with ID: ", docRef.id);
+        		})
+        		.catch(function(error) {
+        			console.log("Error adding document: ", error);
+				});
+        	}	
         };
         var data = new FormData();
         data.append("image", image);
         xhr.send(data);
+
+        event.preventDefault();
     }
 
     test = (event) => {
@@ -44,6 +55,7 @@ export default class UploadDialog extends Component {
     constructor(){
     	super();
     	this.fb = new firebaseService();
+    	console.log(this.fb);
     }
 
     render() {
