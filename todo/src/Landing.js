@@ -30,10 +30,11 @@ export default class Landing extends Component {
     }
     
     render() {
+    	let postGrid = <PostGrid />;
         return (
             <div>
-                <NavBar login={this.state.login}/>
-                <PostGrid />
+                <NavBar login={this.state.login} postGrid={postGrid}/>
+                {postGrid}
             </div>
         )
     }
