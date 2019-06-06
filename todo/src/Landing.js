@@ -16,7 +16,6 @@ export default class Landing extends Component {
         this.auth = new Auth();
     }
 
-
     componentDidMount() {
         let fb = new FirebaseService();
         fb.getAll().then(val => console.log(val));
