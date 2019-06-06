@@ -2,69 +2,46 @@ import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
-import Button from '@material-ui/core/Button';
 import UploadDialog from './UploadDialog';
+import { Modal } from 'react-bootstrap'
 
 export default class NavBar extends Component {
 
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
+
         this.state = {
-            display: '',
-            errorMessage: ''
-        }
+            errorMessage: '',
+        };
+
     }
 
     signupClick = (event) => {
         event.preventDefault();
-        document.getElementById("signupButton").disabled = true;
-        this.setState({ display: 'signup' })
+        this.setState({ signupform: true })
     }
 
     signinClick = (event) => {
-        event.preventDefault();
-        document.getElementById("signinButton").disabled = true;
-        document.getElementById("signupButton").disabled = false;
-        this.setState({ display: 'signin' })
+        this.setState({ signinform: true })
     }
 
     signoutClick = (event) => {
-        event.preventDefault();
         firebase.auth().signOut()
     }
 
     cancelClick = (event) => {
-        event.preventDefault();
-        document.getElementById("signupButton").disabled = false;
-        document.getElementById("signinButton").disabled = false;
-
         this.setState({
-            display: ''
-        })
-    }
-
-    cancelClickSuccess = (event) => {
-        event.preventDefault();
-        this.setState({
-            display: ''
+            signinform: false,
+            signupform: false,
+            registersuccess: false,
+            upload: false
         })
     }
 
     uploadClick = (event) => {
-        event.preventDefault();
-        document.getElementById("signoutButton").disabled = true;
-        document.getElementById("uploadButton").disabled = true;
-        this.setState({ display: 'upload' })
+        this.setState({ upload: true })
     }
 
-    cancelClickUpload = (event) => {
-        event.preventDefault();
-        document.getElementById("signoutButton").disabled = false;
-        document.getElementById("uploadButton").disabled = false;
-        this.setState({
-            display: ''
-        });
-    }
 
     handleRegister = (event) => {
         event.preventDefault();
@@ -75,18 +52,16 @@ export default class NavBar extends Component {
             document.getElementById('passconfirm').style.display = "none";
             firebase.auth().createUserWithEmailAndPassword(event.target[0].value, event.target[1].value)
                 .then(() => {
-                    this.setState({ display: 'registersuccess', errorMessage: '' })
+                    this.setState({ signupform: false, errorMessage: '', registersuccess: true })
                 }).catch(err => this.setState({ errorMessage: err.message }))
         }
     }
 
     handleSignin = (event) => {
         event.preventDefault();
-        document.getElementById("signupButton").disabled = false;
-        document.getElementById("signinButton").disabled = false;
         firebase.auth().signInWithEmailAndPassword(event.target[0].value, event.target[1].value)
             .then(() => {
-                this.setState({ display: '', errorMessage: '' })
+                this.setState({ signinform: false, errorMessage: '' })
             }).catch(err => this.setState({ errorMessage: err.message }));
     }
 
@@ -95,16 +70,16 @@ export default class NavBar extends Component {
 
         if (this.props.login == false) {
             button =
-                <form class="form-inline form-right">
+                <div class="form-inline form-right">
                     <button id="signinButton" className="custom-button btn btn-primary" onClick={this.signinClick}>Sign In</button>
                     <button id="signupButton" className="custom-button btn btn-outline-secondary" onClick={this.signupClick}>Sign Up</button>
-                </form>
+                </div>
         } else {
             button =
-                <form class="form-inline form-right">
+                <div class="form-inline form-right">
                     <button id="uploadButton" className="custom-button btn btn-primary" onClick={this.uploadClick}>Upload</button>
-                    <button id="signoutButton" className="custom-button btn btn-primary" onClick={this.signoutClick}>Sign Out</button>
-                </form>
+                    <button id="signoutButton" className="custom-button btn btn-outline-secondary" onClick={this.signoutClick}>Sign Out</button>
+                </div>
         }
         return (
             <div>
@@ -116,21 +91,13 @@ export default class NavBar extends Component {
                     {button}
                 </nav>
 
-                {this.state.display == 'signin' &&
-                    <Signinform button={this.handleSignin} cancel={this.cancelClick} error={this.state.errorMessage} />
-                }
+                <Signinform signinform={this.state.signinform} cancel={this.cancelClick} handleSignin={this.handleSignin} error={this.state.errorMessage} />
 
-                {this.state.display == 'signup' &&
-                    <Signupform button={this.handleRegister} cancel={this.cancelClick} error={this.state.errorMessage} />
-                }
+                <Signupform signupform={this.state.signupform} cancel={this.cancelClick} handleRegister={this.handleRegister} error={this.state.errorMessage} />
 
-                {this.state.display == 'registersuccess' &&
-                    <Successregister cancel={this.cancelClickSuccess} />
-                }
+                <Successregister cancel={this.cancelClick} registersuccess={this.state.registersuccess} />
 
-                {this.state.display == 'upload' &&
-                    <UploadDialog cancel={this.cancelClickUpload} />
-                }
+                <UploadDialog cancel={this.cancelClick} upload={this.state.upload} />
             </div >
         )
     }
@@ -139,24 +106,29 @@ export default class NavBar extends Component {
 class Signinform extends Component {
     render() {
         return (
-            <div id='signinForm'>
-                <form onSubmit={this.props.button}>
-                    <div>
-                        <label htmlFor="email">Email:</label><br />
-                        <input type="email" id="email" className="text-input" name="email" required="required" />
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password:</label><br />
-                        <input type="password" id="password" name="password" required="required"
-                            className="text-input"></input>
-                    </div>
-                    <p>{this.props.error}</p>
-                    <div className="button">
-                        <button type="submit" className="custom-button" >Sign In</button>
-                        <button type='button' className="custom-button form-right-button" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
-                    </div>
-                </form>
-            </div>
+
+            <Modal show={this.props.signinform} onHide={this.props.cancel}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Sign In</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <form onSubmit={this.props.handleSignin}>
+                        <div class="form-group">
+                            <label htmlFor="email">Email:</label><br />
+                            <input type="email" id="email" className="form-control" name="email" required="required" placeholder="Enter email"></input>
+                        </div>
+                        <div class="form-group">
+                            <label htmlFor="password">Password:</label><br />
+                            <input type="password" id="password" className="form-control" name="password" required="required" placeholder="Password"></input>
+                        </div>
+                        <p>{this.props.error}</p>
+                        <div className="button">
+                            <button type="submit" class="btn btn-primary">Sign In</button>
+                            <button type='button' class="btn btn-secondary form-right-button" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
+                        </div>
+                    </form>
+                </Modal.Body>
+            </Modal>
         )
     }
 }
@@ -164,31 +136,36 @@ class Signinform extends Component {
 class Signupform extends Component {
     render() {
         return (
-            <div id='signupForm'>
-                <form onSubmit={this.props.button} >
-                    <div>
-                        <label htmlFor="email">Email:</label><br />
-                        <input type="email" id="email" className="text-input" name="email" required="required" />
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password:</label><br />
-                        <input type="password" id="password" name="password" pattern=".{6,}" title="Six or more characters" required="required"
-                            className="text-input"></input>
-                    </div>
-                    <div>
-                        <label htmlFor="confirm">Confirm password:</label><br />
-                        <input type="password" id="confirm" className="text-input" name="passwordconf" required="required" />
-                    </div>
-                    <div id='passconfirm'>
-                        <p>Invalid password confirmation</p>
-                    </div>
-                    <p>{this.props.error}</p>
-                    <div className="button">
-                        <button type="submit" className="custom-button">Register</button>
-                        <button type='button' className="custom-button form-right-button" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
-                    </div>
-                </form>
-            </div>
+            <Modal show={this.props.signupform} onHide={this.props.cancel}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Register</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <form onSubmit={this.props.handleRegister} >
+                        <div class="form-group">
+                            <label htmlFor="email">Email:</label><br />
+                            <input type="email" id="email" className="form-control" name="email" required="required" placeholder="Enter email" />
+                        </div>
+                        <div class="form-group">
+                            <label htmlFor="password">Password:</label><br />
+                            <input type="password" id="password" className="form-control" pattern=".{6,}" title="Six or more characters" required="required"
+                                placeholder="Password"></input>
+                        </div>
+                        <div class="form-group">
+                            <label htmlFor="confirm">Confirm password:</label><br />
+                            <input type="password" id="confirm" className="form-control" name="passwordconf" required="required" placeholder="Password confirmation" />
+                        </div>
+                        <div id='passconfirm'>
+                            <p>Invalid password confirmation</p>
+                        </div>
+                        <p>{this.props.error}</p>
+                        <div className="button">
+                            <button type="submit" className="btn btn-primary">Register</button>
+                            <button type='button' className="btn btn-secondary form-right-button" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
+                        </div>
+                    </form>
+                </Modal.Body>
+            </Modal>
         )
     }
 }
@@ -196,10 +173,12 @@ class Signupform extends Component {
 class Successregister extends Component {
     render() {
         return (
-            <div id='successRegister'>
-                <p>Your account has been created and you have been logged in!</p>
-                <button type='button' className="custom-button" onClick={this.props.cancel} >Close</button>
-            </div>
+            <Modal show={this.props.registersuccess} onHide={this.props.cancel}>
+                <Modal.Body>
+                    <p>Your account has been created and you have been logged in!</p>
+                    <button type='button' class="btn btn-primary" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
+                </Modal.Body>
+            </Modal>
         )
     }
 }
