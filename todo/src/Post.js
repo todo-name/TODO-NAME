@@ -20,16 +20,31 @@ export default class Post extends Component {
 	constructor() {
 		super();
 		this.state = {
-			likes: 0
+			likes: 0,
+			liked: false
 		}
 	}
 	componentDidMount() {
-		this.setState({likes: this.props.post[Object.keys(this.props.post)[0]].likes});
+		this.setState({
+			likes: this.props.post[Object.keys(this.props.post)[0]].likes,
+			liked: this.props.liked
+		});
+	}
+	componentWillReceiveProps(props) {
+		this.setState({
+			likes: props.post[Object.keys(props.post)[0]].likes,
+			liked: props.liked
+		});
 	}
 
 	like = (event) => {
-		if (!this.props.auth.hasLiked(Object.keys(this.props.post)[0])) {
-			this.props.fb.likePost(this.props.post, this.props.auth.getUser()).then(results => this.setState({likes: results}));
+		if (!this.state.liked) {
+			this.props.fb.likePost(this.props.post, this.props.auth.getUser()).then(results => {
+				this.setState({
+					likes: results,
+					liked: true
+				});
+			});
 		}
 	}
 
@@ -77,7 +92,7 @@ export default class Post extends Component {
 					</div>
 					{this.props.auth.checkLoggedIn() ? <div style={likeStyle}>
 						<img src={heart} width={24} height={24} onClick={this.like} 
-								style={this.props.liked ? {backgroundColor: "red"}: {}}></img>
+								style={this.state.liked ? {backgroundColor: "red"}: {}}></img>
 						<div style={likeCounterStyle}> {this.state.likes}</div>
 					</div> : undefined}
 				</Paper>

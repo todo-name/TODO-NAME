@@ -7,7 +7,6 @@ export default class Auth {
     }
 
     setUser(user) {
-        console.log(user);
         this.user = user;
     }
 
@@ -24,7 +23,6 @@ export default class Auth {
     }
 
     addLikedPosts(posts) {
-        console.log(posts);
         this.postsLiked.next(posts);
     }
 }
