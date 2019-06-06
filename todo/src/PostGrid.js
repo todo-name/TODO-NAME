@@ -22,7 +22,6 @@ export default class PostGrid extends Component {
 	}
 
 	render() {
-    	// Temporary until we pipe in posts data from the backend.
     	return(
     		<div>
     		<Grid
