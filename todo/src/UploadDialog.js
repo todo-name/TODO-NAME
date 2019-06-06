@@ -29,7 +29,7 @@ export default class UploadDialog extends Component {
         			likes: 0,
         			time_posted: new Date(imgurData.datetime * 1000),
         			title: "",
-        			uid: "",
+        			uid: this.props.auth.getUser(),
         			url: imgurData.link
         		};
 
@@ -57,7 +57,6 @@ export default class UploadDialog extends Component {
     constructor(){
     	super();
     	this.fb = new firebaseService();
-    	console.log(this.fb);
     }
 
     render() {
@@ -68,15 +67,15 @@ export default class UploadDialog extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <form >
-                        <div class="form-group">
+                        <div className="form-group">
                             <label htmlFor="title">Title</label><br />
                             <input type="text" id="title" name="title" className="form-control" required="required" maxLength="150" />
                         </div>
-                        <div class="form-group">
+                        <div className="form-group">
                             <label htmlFor="upload_image">Upload Image</label><br />
                             <input type="file" id="upload_image" name="image" accept="image/*" onChange={this.test} />
                         </div>
-                        <div class="form-group">
+                        <div className="form-group">
                             <label htmlFor="tags">Tags:</label><br />
                             <input type="tags" id="tags" name="tags"
                                 className="form-control" maxLength="500"></input>

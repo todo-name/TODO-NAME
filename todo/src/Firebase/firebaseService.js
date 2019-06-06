@@ -3,6 +3,7 @@ import firebase from './firebase';
 export default class FirebaseService {
     constructor() {
         this.db = firebase.firestore().collection("posts");
+        this.pldb = firebase.firestore().collection("postsLiked");
     }
 
     add(data) {
@@ -17,7 +18,7 @@ export default class FirebaseService {
 
     get(pid) {
         let data = {}
-        return this.db.where("pid", "==", pid).get().then(
+        return this.db.doc(pid).get().then(
             snapshot => {
                 snapshot.forEach(snap => data.push({[snap.id]: snap.data()}));
                 return data;
@@ -35,6 +36,27 @@ export default class FirebaseService {
         );
     }
 
+    likePost(post, uid) {
+        return new Promise((resolve, reject) => {
+            let likes;
+            let key = Object.keys(post)[0];
+            let doc = this.db.doc(key)
+            doc.get().then(snapshot => {
+                likes = snapshot.data().likes + 1;
+                console.log(likes); 
+                doc.set({
+                    likes: likes
+                }, {merge: true})
+                .then(() => {
+                    this.pldb.add({
+                        "pid": key,
+                        "uid": uid
+                    }).then(() => resolve(likes))
+                });
+            });
+        });
+    }
+
     getRecent() {
         return this.getAll().then(data => {
             return data.sort((a, b) => {
@@ -43,5 +65,17 @@ export default class FirebaseService {
                 return dateA > dateB ? -1 : dateA < dateB ? 1 : 0; 
             });
         });
+    }
+
+    getLikedPosts(uid) {
+        let data = [];
+        return this.pldb.where("uid", "==", uid).get().then(
+            snapshots => {
+                snapshots.forEach(snap => {
+                    data.push(snap.data().pid);
+                })
+                return data;
+            }
+        )
     }
 }

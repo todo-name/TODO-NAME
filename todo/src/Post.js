@@ -17,9 +17,20 @@ const paperStyle = {
 };
 
 export default class Post extends Component {
+	constructor() {
+		super();
+		this.state = {
+			likes: 0
+		}
+	}
+	componentDidMount() {
+		this.setState({likes: this.props.post[Object.keys(this.props.post)[0]].likes});
+	}
 
 	like = (event) => {
-		// API call to like
+		if (!this.props.auth.hasLiked(Object.keys(this.props.post)[0])) {
+			this.props.fb.likePost(this.props.post, this.props.auth.getUser()).then(results => this.setState({likes: results}));
+		}
 	}
 
 	render() {
@@ -59,15 +70,16 @@ export default class Post extends Component {
 				<Paper style={paperStyle}>
 					<div style={styles.postHeader}>
 						{postData.desc}
-						<Menu />
+						<Menu auth={this.props.auth} fb={this.props.fb}/>
 					</div>
 					<div style={cellStyle}>
 						{postImage}
 					</div>
-					<div style={likeStyle}>
-						<img src={heart} width={24} height={24} onClick={this.like}></img>
-						<div style={likeCounterStyle}> {postData.likes}</div>
-					</div>
+					{this.props.auth.checkLoggedIn() ? <div style={likeStyle}>
+						<img src={heart} width={24} height={24} onClick={this.like} 
+								style={this.props.liked ? {backgroundColor: "red"}: {}}></img>
+						<div style={likeCounterStyle}> {this.state.likes}</div>
+					</div> : undefined}
 				</Paper>
 			</Grid>
 			)
@@ -93,16 +105,16 @@ class Menu extends Component {
 		return (
 			<div className="dropdown">
 				<img className="dots dropdown-toggle"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"src={Dots}></img>						
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a class="dropdown-item" href="#" >
+				<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<a className="dropdown-item" href="#" >
 						<img src={copy} style={styles.icon}></img>
 						Copy Link
 					</a>
-					<a class="dropdown-item" href="#" onClick={this.clickReport}>
+					{this.props.auth.checkLoggedIn() ? <a className="dropdown-item" href="#" onClick={this.clickReport}>
 						<img src={mark} style={styles.icon}></img>
 						Report
-					</a>
-					<Report open={this.state.open} click={this.clickReport} />
+					</a> : undefined}
+					<Report open={this.state.open} click={this.clickReport}/>
 				</div>
 			</div>
 		)

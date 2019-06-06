@@ -13,7 +13,6 @@ export default class NavBar extends Component {
         this.state = {
             errorMessage: '',
         };
-
     }
 
     signupClick = (event) => {
@@ -26,7 +25,8 @@ export default class NavBar extends Component {
     }
 
     signoutClick = (event) => {
-        firebase.auth().signOut()
+        firebase.auth().signOut();
+        this.props.auth.signOut();
     }
 
     cancelClick = (event) => {
@@ -51,8 +51,9 @@ export default class NavBar extends Component {
         } else {
             document.getElementById('passconfirm').style.display = "none";
             firebase.auth().createUserWithEmailAndPassword(event.target[0].value, event.target[1].value)
-                .then(() => {
-                    this.setState({ signupform: false, errorMessage: '', registersuccess: true })
+                .then((data) => {
+                    this.setState({ signupform: false, errorMessage: '', registersuccess: true });
+                    this.props.auth.setUser(data.user.uid);
                 }).catch(err => this.setState({ errorMessage: err.message }))
         }
     }
@@ -60,8 +61,9 @@ export default class NavBar extends Component {
     handleSignin = (event) => {
         event.preventDefault();
         firebase.auth().signInWithEmailAndPassword(event.target[0].value, event.target[1].value)
-            .then(() => {
-                this.setState({ signinform: false, errorMessage: '' })
+            .then((data) => {
+                this.setState({ signinform: false, errorMessage: '' });
+                this.props.auth.setUser(data.user.uid);
             }).catch(err => this.setState({ errorMessage: err.message }));
     }
 
@@ -97,7 +99,7 @@ export default class NavBar extends Component {
 
                 <Successregister cancel={this.cancelClick} registersuccess={this.state.registersuccess} />
 
-                <UploadDialog cancel={this.cancelClick} upload={this.state.upload} />
+                <UploadDialog cancel={this.cancelClick} upload={this.state.upload} auth={this.props.auth} />
             </div >
         )
     }
