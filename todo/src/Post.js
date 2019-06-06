@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogActions } from '@material-ui/core/';
 
 import heart from './img/like.svg';
 import redHeart from './img/red_like.svg';
+import { throwStatement } from '@babel/types';
 
 const paperStyle = {
 	width: 300,
@@ -46,7 +47,14 @@ export default class Post extends Component {
 					liked: true
 				});
 			});
-		}
+		} else {
+			this.props.fb.unlikePost(this.props.post, this.props.auth.getUser()).then(results => {
+				this.setState({
+					likes: results,
+					liked: false
+				})
+			})
+		} 
 	}
 
 	render() {
@@ -93,7 +101,7 @@ export default class Post extends Component {
 					</div>
 					{this.props.auth.checkLoggedIn() ? <div style={likeStyle}>
 						<img src={this.state.liked ? redHeart : heart} width={24} height={24} onClick={this.like}
-								style={this.state.liked ? undefined : {cursor: "pointer"}}></img>
+								style={{cursor: "pointer"}}></img>
 						<div style={likeCounterStyle}> {this.state.likes}</div>
 					</div> : undefined}
 				</Paper>
