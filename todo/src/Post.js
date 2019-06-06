@@ -6,7 +6,8 @@ import copy from './img/copy.png';
 import mark from './img/exclamation.png';
 import { Dialog, DialogContent, DialogActions } from '@material-ui/core/';
 
-import heart from './img/heart.png';
+import heart from './img/like.svg';
+import redHeart from './img/red_like.svg';
 
 const paperStyle = {
 	width: 300,
@@ -91,8 +92,8 @@ export default class Post extends Component {
 						{postImage}
 					</div>
 					{this.props.auth.checkLoggedIn() ? <div style={likeStyle}>
-						<img src={heart} width={24} height={24} onClick={this.like} 
-								style={this.state.liked ? {backgroundColor: "red"}: {}}></img>
+						<img src={this.state.liked ? redHeart : heart} width={24} height={24} onClick={this.like}
+								style={this.state.liked ? undefined : {cursor: "pointer"}}></img>
 						<div style={likeCounterStyle}> {this.state.likes}</div>
 					</div> : undefined}
 				</Paper>
