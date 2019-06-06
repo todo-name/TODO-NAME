@@ -5,6 +5,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import FirebaseService from './Firebase/firebaseService';
+import Auth from './Auth';
 
 export default class Landing extends Component {
     constructor(props) {
@@ -12,6 +13,7 @@ export default class Landing extends Component {
         this.state = {
             login: false,
         }
+        this.auth = new Auth();
     }
 
 
@@ -23,17 +25,20 @@ export default class Landing extends Component {
         let authUnregFunc = firebase.auth().onAuthStateChanged((firebaseUser) => {
             if (firebaseUser) { //firebaseUser defined: is logged in
                 this.setState({ login: true });
+                this.auth.setUser(firebaseUser.uid);
+                fb.getLikedPosts(firebaseUser.uid).then(data => this.auth.addLikedPosts(data));
             } else { //firebaseUser undefined: is not logged in
-                this.setState({ login: false })
+                this.setState({ login: false });
             }
         });
     }
     
     render() {
+    	let postGrid = <PostGrid auth={this.auth}/>;
         return (
             <div>
-                <NavBar login={this.state.login}/>
-                <PostGrid />
+                <NavBar login={this.state.login} postGrid={postGrid} auth={this.auth}/>
+                {postGrid}
             </div>
         )
     }

@@ -17,9 +17,35 @@ const paperStyle = {
 };
 
 export default class Post extends Component {
+	constructor() {
+		super();
+		this.state = {
+			likes: 0,
+			liked: false
+		}
+	}
+	componentDidMount() {
+		this.setState({
+			likes: this.props.post[Object.keys(this.props.post)[0]].likes,
+			liked: this.props.liked
+		});
+	}
+	componentWillReceiveProps(props) {
+		this.setState({
+			likes: props.post[Object.keys(props.post)[0]].likes,
+			liked: props.liked
+		});
+	}
 
 	like = (event) => {
-		// API call to like
+		if (!this.state.liked) {
+			this.props.fb.likePost(this.props.post, this.props.auth.getUser()).then(results => {
+				this.setState({
+					likes: results,
+					liked: true
+				});
+			});
+		}
 	}
 
 	render() {
@@ -42,7 +68,9 @@ export default class Post extends Component {
 			marginTop: 8,
 			marginBottom: 8
 		};
-		const imageStyle = { maxWidth: "100%" };
+		const imageStyle = { maxWidth: "100%", objectFit: "contain" };
+		const likeStyle = { display: "flex", flexDirection: "row", alignContent: "center" };
+		const likeCounterStyle = { marginLeft: 8 };
 
 		let post = this.props.post;
 		let key = Object.keys(post)[0];
@@ -51,7 +79,7 @@ export default class Post extends Component {
 		let postImage = null;
 		if(postData.url.endsWith(".gifv")){
 			let videourl = postData.url.replace(".gifv", ".mp4");
-			postImage = <video src={videourl} style={imageStyle} autoPlay />;
+			postImage = <video src={videourl} style={imageStyle} autoPlay muted />;
 		} else {
 			postImage = <img crossOrigin="" style={imageStyle} src={postData.url} ></img>;
 		}
@@ -61,12 +89,16 @@ export default class Post extends Component {
 				<Paper style={styles.paperStyle}>
 					<div style={styles.postHeader}>
 						{postData.desc}
-						<Menu />
+						<Menu auth={this.props.auth} fb={this.props.fb}/>
 					</div>
-				<div style={cellStyle}>
-					{postImage}
-				</div>
-				<img src={heart} width={24} height={24} onClick={this.like}></img>
+					<div style={cellStyle}>
+						{postImage}
+					</div>
+					{this.props.auth.checkLoggedIn() ? <div style={likeStyle}>
+						<img src={heart} width={24} height={24} onClick={this.like} 
+								style={this.state.liked ? {backgroundColor: "red"}: {}}></img>
+						<div style={likeCounterStyle}> {this.state.likes}</div>
+					</div> : undefined}
 				</Paper>
 			</Grid>
 			)
@@ -92,16 +124,16 @@ class Menu extends Component {
 		return (
 			<div className="dropdown">
 				<img className="dots dropdown-toggle"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"src={Dots}></img>						
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a class="dropdown-item" href="#" >
+				<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<a className="dropdown-item" href="#" >
 						<img src={copy} style={styles.icon}></img>
 						Copy Link
 					</a>
-					<a class="dropdown-item" href="#" onClick={this.clickReport}>
+					{this.props.auth.checkLoggedIn() ? <a className="dropdown-item" href="#" onClick={this.clickReport}>
 						<img src={mark} style={styles.icon}></img>
 						Report
-					</a>
-					<Report open={this.state.open} click={this.clickReport} />
+					</a> : undefined}
+					<Report open={this.state.open} click={this.clickReport}/>
 				</div>
 			</div>
 		)
