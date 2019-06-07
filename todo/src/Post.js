@@ -76,6 +76,7 @@ export default class Post extends Component {
 		const imageStyle = { maxWidth: "100%", objectFit: "contain" };
 		const likeStyle = { display: "flex", flexDirection: "row", alignContent: "center" };
 		const likeCounterStyle = { marginLeft: 8 };
+		const descStyle = { marginBottom: 8 };
 
 		let post = this.props.post;
 		let key = Object.keys(post)[0];
@@ -93,11 +94,14 @@ export default class Post extends Component {
 			<Grid item>
 				<Paper style={paperStyle}>
 					<div style={styles.postHeader}>
-						{postData.desc}
+						{postData.title}
 						<Menu auth={this.props.auth} fb={this.props.fb} pid={key}/>
 					</div>
 					<div style={cellStyle}>
 						{postImage}
+					</div>
+					<div style={descStyle}>
+						{postData.desc}
 					</div>
 					{this.props.auth.checkLoggedIn() ? <div style={likeStyle}>
 						<img src={this.state.liked ? redHeart : heart} width={24} height={24} onClick={this.like}
