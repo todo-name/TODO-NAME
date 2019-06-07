@@ -17,6 +17,7 @@ export default class UploadDialog extends Component {
         xhr.setRequestHeader("Authorization", "Client-ID " + apiKey);
 
         let firebase = this.fb;
+        let auth = this.props.auth;
 
         xhr.onload = function() {
         	if(xhr.status == 200){
@@ -29,7 +30,7 @@ export default class UploadDialog extends Component {
         			likes: 0,
         			time_posted: new Date(imgurData.datetime * 1000),
         			title: "",
-        			uid: this.props.auth.getUser(),
+        			uid: auth.getUser(),
         			url: imgurData.link
         		};
 
