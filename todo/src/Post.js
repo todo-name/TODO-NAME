@@ -94,7 +94,7 @@ export default class Post extends Component {
 				<Paper style={paperStyle}>
 					<div style={styles.postHeader}>
 						{postData.desc}
-						<Menu auth={this.props.auth} fb={this.props.fb}/>
+						<Menu auth={this.props.auth} fb={this.props.fb} pid={key}/>
 					</div>
 					<div style={cellStyle}>
 						{postImage}
@@ -138,7 +138,7 @@ class Menu extends Component {
 						<img src={mark} style={styles.icon}></img>
 						Report
 					</a> : undefined}
-					<Report open={this.state.open} click={this.clickReport}/>
+					<Report open={this.state.open} click={this.clickReport} fb={this.props.fb} pid={this.props.pid}/>
 				</div>
 			</div>
 		)
@@ -146,6 +146,14 @@ class Menu extends Component {
 }
 
 class Report extends Component {
+	constructor() {
+		super();
+		this.reportInfo = {
+			flagged: true,
+			reportCategory: "",
+			reportDesc: ""
+		}
+	}
     render() {
 		const types = ['Not a dog', 'Not cute', 'Inappropriate', 'A cat', 'Other']
         return (
@@ -158,7 +166,8 @@ class Report extends Component {
                 aria-labelledby="scroll-dialog-title"
             >
                 <DialogContent>
-					<select>
+					<select onChange={(event) => this.reportInfo.reportCategory = event.target.value}>
+						<option value=""></option>
 						{
 							types.map((type) => {
 								return (
@@ -167,10 +176,13 @@ class Report extends Component {
 							})
 						}
 					</select>
-					<textarea id="report-description" type="text" placeholder="Tell us more..." maxLength="500"></textarea>
+					<textarea id="report-description" type="text" placeholder="Tell us more..." maxLength="500"
+							onChange={(event) => this.reportInfo.reportDesc = event.target.value}></textarea>
                 </DialogContent>
                 <DialogActions>
-					<button className="btn btn-primary" type="button" onClick={this.props.click}>Report</button>
+					<button className="btn btn-primary" type="button" onClick={() => {
+						this.props.fb.flag(this.props.pid, this.reportInfo); this.props.click()}
+					}>Report</button>
                 </DialogActions>
             </Dialog>
         )
