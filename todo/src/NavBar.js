@@ -102,7 +102,8 @@ export default class NavBar extends Component {
         		};
 
         		firebase.add(data).then(function(docRef) {
-        			console.log("Document written with ID: ", docRef.id);
+                    console.log("Document written with ID: ", docRef.id);
+                    this.props.getRecentPosts();
         		})
         		.catch(function(error) {
         			console.log("Error adding document: ", error);
@@ -115,7 +116,6 @@ export default class NavBar extends Component {
 
         event.preventDefault();
         this.cancelClick();
-        this.props.getRecentPosts();
     }
 
     
