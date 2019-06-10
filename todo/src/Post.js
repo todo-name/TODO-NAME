@@ -93,7 +93,7 @@ export default class Post extends Component {
 			<Grid item>
 				<Paper style={paperStyle}>
 					<div style={styles.postHeader}>
-						{postData.desc}
+						<h5>{postData.title}</h5>
 						<Menu auth={this.props.auth} fb={this.props.fb}/>
 					</div>
 					<div style={cellStyle}>
@@ -104,6 +104,7 @@ export default class Post extends Component {
 								style={{cursor: "pointer"}}></img>
 						<div style={likeCounterStyle}> {this.state.likes}</div>
 					</div> : undefined}
+					{postData.desc}
 				</Paper>
 			</Grid>
 			)
@@ -131,7 +132,7 @@ class Menu extends Component {
 				<img className="dots dropdown-toggle"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"src={Dots}></img>						
 				<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					<a className="dropdown-item" href="#" >
-						<img src={copy} style={styles.icon}></img>
+						<img src={copy} style={styles.icon} ></img>
 						Copy Link
 					</a>
 					{this.props.auth.checkLoggedIn() ? <a className="dropdown-item" href="#" onClick={this.clickReport}>
@@ -146,8 +147,25 @@ class Menu extends Component {
 }
 
 class Report extends Component {
+	confirmedMessage = (props) => {
+		return (
+			<Dialog
+				open='true'
+				onClose={props.click}
+			>
+				<DialogContent>
+					Report Submitted! 
+				</DialogContent>
+				<DialogActions>
+					<button className='btn btn-secondary' type='button'>
+						Close
+					</button>
+				</DialogActions>
+			</Dialog>
+		)
+	}
     render() {
-		const types = ['Not a dog', 'Not cute', 'Inappropriate', 'A cat', 'Other']
+		const types = ['Not a dog', 'Not cute', 'A cat', 'Other']
         return (
             <Dialog
                 open={this.props.open}
@@ -172,7 +190,9 @@ class Report extends Component {
                 <DialogActions>
 					<button className="btn btn-primary" type="button" onClick={this.props.click}>Report</button>
                 </DialogActions>
+				{this.confirmedMessage}
             </Dialog>
         )
     }
 }
+
