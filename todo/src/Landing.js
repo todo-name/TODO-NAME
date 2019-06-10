@@ -14,6 +14,7 @@ export default class Landing extends Component {
             login: false,
             postsData: [],
         }
+        this.getRecentPosts = this.getRecentPosts.bind(this);
         this.auth = new Auth();
         this.fb = new FirebaseService();
     }
@@ -40,6 +41,7 @@ export default class Landing extends Component {
         let fb = new FirebaseService();
 		fb.getRecent().then(data => {
             this.setState({postsData: data});
+            console.log(this.state.postsData)
         })
     }
 
