@@ -1,3 +1,4 @@
+  
 import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap'
 import firebaseService from './Firebase/firebaseService';
@@ -50,6 +51,7 @@ export default class UploadDialog extends Component {
 
         event.preventDefault();
         this.props.cancel();
+        this.props.getRecentPosts();
     }
 
     test = (event) => {
@@ -69,7 +71,7 @@ export default class UploadDialog extends Component {
                     <Modal.Title>Upload Picture</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form >
+                    <form onSubmit={this.submit}>
                         <div className="form-group">
                             <label htmlFor="title">Title</label><br />
                             <input type="text" id="title" name="title" className="form-control" required="required" maxLength="150" />
@@ -80,7 +82,7 @@ export default class UploadDialog extends Component {
                         </div>
                         <div className="form-group">
                             <label htmlFor="upload_image">Upload Image</label><br />
-                            <input type="file" id="upload_image" name="image" accept="image/*" onChange={this.test} />
+                            <input type="file" id="upload_image" name="image" accept="image/*" required="required" onChange={this.test} />
                         </div>
                         <div className="form-group">
                             <label htmlFor="tags">Tags:</label><br />
@@ -89,7 +91,7 @@ export default class UploadDialog extends Component {
                         </div>
                         <p>{this.props.error}</p>
                         <div className="button">
-                            <button type="submit" className="btn btn-primary" onClick={this.submit}>Post</button>
+                            <button type="submit" className="btn btn-primary" >Post</button>
                             <button type='button' className="btn btn-secondary form-right-button" formNoValidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
                         </div>
                     </form>

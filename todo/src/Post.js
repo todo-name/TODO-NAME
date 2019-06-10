@@ -82,7 +82,6 @@ export default class Post extends Component {
 		let post = this.props.post;
 		let key = Object.keys(post)[0];
 		let postData = post[key];
-
 		let postImage = null;
 		let url = '';
 		if(postData.url.endsWith(".gifv")){
