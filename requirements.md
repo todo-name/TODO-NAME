@@ -27,7 +27,7 @@
 - Only one image is allowed.  (Complete)
 - Once image is picked, the user will see the image display and a “Change Image” button will be next to the image if user decide to change to another image. (Complete)
 - There is a “X” on the top right corner if user want to cancel uploading image. A warning will pop up where user can choose to stay or exit and discard changes. (Revised: Decided to not implement warning as user is not inputting much information, so an extra check is not necessary)
-- User must be able to add “tags/descriptions” with maximum of 500 characters. (Revised: Descriptions and tags served the same purpose of filtering out pictures when search is used, so we just kep description)
+- User must be able to add “tags/descriptions” with maximum of 500 characters. (Revised: Descriptions and tags served the same purpose of filtering out pictures when search is used, so we just kept description)
 - User must be able to use “#” to indicate tags. (Revised: No tags, so this requirement was also left out)
 - User must be able to use emoji. (Complete)
 - User must be able to click upload button and see their image at the top of the main page in the position
