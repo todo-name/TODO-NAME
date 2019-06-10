@@ -103,6 +103,7 @@ export default class NavBar extends Component {
 
         		firebase.add(data).then(function(docRef) {
                     console.log("Document written with ID: ", docRef.id);
+                    window.location.reload(); 
                     this.props.getRecentPosts();
         		})
         		.catch(function(error) {
@@ -169,7 +170,7 @@ class UploadDialog extends Component {
                     <form onSubmit={this.props.upload}>
                         <div className="form-group">
                             <label htmlFor="title">Title</label><br />
-                            <input type="text" id="title" name="title" className="form-control" required="required" maxLength="150" />
+                            <input type="text" id="title" name="title" className="form-control" maxLength="150" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="desc">Description</label><br />

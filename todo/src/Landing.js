@@ -62,12 +62,12 @@ export default class Landing extends Component {
                     let key = Object.keys(post[i])[0];
                     let postData = post[i][key]
                     if ((typeof searchTerm) == 'string') {
-                        if (postData.title.toLowerCase().includes(searchTerm)) {
+                        if (postData.desc.toLowerCase().includes(searchTerm)) {
                             filteredPosts.push(post[i]);
                         }
                     } else {
                         for (var j = 0; j < searchTerm.length; j++) {
-                            if (postData.title.toLowerCase().includes(searchTerm[j])) {
+                            if (postData.desc.toLowerCase().includes(searchTerm[j])) {
                                 filteredPosts.push(post[i]);
                                 j = searchTerm.length
                             }
