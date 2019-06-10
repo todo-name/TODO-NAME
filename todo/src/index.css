@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+h5 {
+  color: rgb(53, 114, 184)
+}
+
 #passconfirm {
   display: none
 }

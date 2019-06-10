@@ -82,10 +82,13 @@ export default class Post extends Component {
 		let key = Object.keys(post)[0];
 		let postData = post[key];
 		let postImage = null;
+		let url = '';
 		if(postData.url.endsWith(".gifv")){
 			let videourl = postData.url.replace(".gifv", ".mp4");
+			url = videourl;
 			postImage = <video src={videourl} style={imageStyle} autoPlay muted loop/>;
 		} else {
+			url = postData.url
 			postImage = <img crossOrigin="" style={imageStyle} src={postData.url} ></img>;
 		}
 
@@ -94,7 +97,7 @@ export default class Post extends Component {
 				<Paper style={paperStyle}>
 					<div style={styles.postHeader}>
 						{postData.title}
-						<Menu auth={this.props.auth} fb={this.props.fb} pid={key}/>
+						<Menu auth={this.props.auth} fb={this.props.fb} pid={key} url={url}/>
 					</div>
 					<div style={cellStyle}>
 						{postImage}
@@ -123,6 +126,13 @@ class Menu extends Component {
 			open: !this.state.open,
 		})
 	}
+	clickCopy = () => {
+		const el = document.createElement('textarea');
+		el.value = this.props.url;
+		document.body.appendChild(el);
+		el.select();
+		document.execCommand('copy');
+	}
 	render() {
 		const styles = {
 			icon: {
@@ -134,7 +144,7 @@ class Menu extends Component {
 				<img className="dots dropdown-toggle"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"src={Dots}></img>						
 				<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					<a className="dropdown-item" href="#" >
-						<img src={copy} style={styles.icon}></img>
+						<img src={copy} style={styles.icon} onClick={this.clickCopy}></img>
 						Copy Link
 					</a>
 					{this.props.auth.checkLoggedIn() ? <a className="dropdown-item" href="#" onClick={this.clickReport}>
@@ -151,11 +161,17 @@ class Menu extends Component {
 class Report extends Component {
 	constructor() {
 		super();
+		this.state={}
 		this.reportInfo = {
 			flagged: true,
 			reportCategory: "",
 			reportDesc: ""
 		}
+	}
+	confirm = () => {
+		this.setState({
+			confirm: true
+		})
 	}
     render() {
 		const types = ['Not a dog', 'Not cute', 'Inappropriate', 'A cat', 'Other']
@@ -184,9 +200,22 @@ class Report extends Component {
                 </DialogContent>
                 <DialogActions>
 					<button className="btn btn-primary" type="button" onClick={() => {
-						this.props.fb.flag(this.props.pid, this.reportInfo); this.props.click()}
+						this.props.fb.flag(this.props.pid, this.reportInfo); this.confirm()}
 					}>Report</button>
                 </DialogActions>
+				<Dialog
+					open={this.state.confirm}
+					onClose={this.props.click}
+					>
+					<DialogContent>
+						Report submitted!
+					</DialogContent>
+					<DialogActions>
+						<button type="button" onClick={this.props.click}>
+							Close
+						</button>
+					</DialogActions>
+				</Dialog>
             </Dialog>
         )
     }
