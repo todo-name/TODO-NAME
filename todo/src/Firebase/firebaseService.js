@@ -80,8 +80,10 @@ export default class FirebaseService {
     getRecent() {
         return this.getAll().then(data => {
             return data.sort((a, b) => {
-                let dateA = new Date(a.time_posted); 
-                let dateB = new Date(b.time_posted);
+                a = a[Object.keys(a)[0]];
+                b = b[Object.keys(b)[0]];
+                let dateA = new Date(a.time_posted.seconds); 
+                let dateB = new Date(b.time_posted.seconds);
                 return dateA > dateB ? -1 : dateA < dateB ? 1 : 0; 
             });
         });

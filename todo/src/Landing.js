@@ -39,6 +39,7 @@ export default class Landing extends Component {
     getRecentPosts() {
         let fb = new FirebaseService();
 		fb.getRecent().then(data => {
+            console.log(data);
             this.setState({postsData: data});
         })
     }
