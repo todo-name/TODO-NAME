@@ -15,10 +15,10 @@
 - The height of the image grid will fill the extent of the browser.
 - Scrolling down on the page will load more images into the grid, with the same dimensions as the previous images.
 - Each tile in the image grid will have a title above it, a heart button in the top left of the image, and an ellipsis button in the top right of the image.
-- The heart button for each tile will be filled in when the user clicks on it.
-The ellipsis button will expand to show a menu with copy and report options.
-- The copy option, when clicked, will copy the link of the image to the user’s clipboard.
-The report option, when clicked, will open the report image dialog.
+- The heart button for each tile will be filled in when the user clicks on it. (complete)
+- The ellipsis button will expand to show a menu with copy and report options.
+- The copy option, when clicked, will copy the link of the image to the user’s clipboard. 
+- The report option, when clicked, will open the report image dialog.
 
 
 ## Upload Image
@@ -80,10 +80,10 @@ put in the left most column.
 - When user clicks Sign In and email is valid but that email has not been registered, a message saying "There is no user record corresponding to this identifier. The user may heave been deleted." will show below the password textarea.
 - When the user clicks on submit and email is valid but password is invalid, a message will show below the password textarea saying “The password is invalid or the user does not have a password”.
 - When the user clicks on submit and the inputted email and password are valid, the user is signed in and redirected to the main page.
-- A signed in user is able to post and like pictures.
+- A signed in user is able to post and like pictures. (complete)
 - When the user is signed in, the sign in and sign up button disappear and a sign out button appears to the right of the search bar.
 - When the user clicks on the sign out button, the user is signed out and the sign in and sign up appear in their original positions.
-- A signed out user is unable to post and like pictures.
+- A signed out user is unable to post and like pictures. (complete)
 
 ## Mobile Look / Responsiveness
 - On screens with width less than 992px, picture frames will be aligned in rows of 3 with all frames centered on the page horizontally, and all pictures evenly spaced from one another.
