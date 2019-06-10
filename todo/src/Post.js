@@ -4,8 +4,8 @@ import Paper from '@material-ui/core/Paper';
 import Dots from './img/dots.png';
 import copy from './img/copy.png';
 import mark from './img/exclamation.png';
-import x from './img/x.png';
-import { Dialog, DialogContent, DialogActions, DialogTitle } from '@material-ui/core/';
+import CloseIcon from '@material-ui/icons/Close';
+import { Dialog, DialogContent, DialogActions, DialogTitle, IconButton, Toolbar } from '@material-ui/core/';
 
 import heart from './img/like.svg';
 import redHeart from './img/red_like.svg';
@@ -58,6 +58,9 @@ export default class Post extends Component {
 		} 
 	}
 
+	clickImage = () => {
+		this.setState({open: !this.state.open})
+	}
 	render() {
 		const styles = {
 			postHeader: {
@@ -72,7 +75,8 @@ export default class Post extends Component {
 			minHeight: 0, 
 			background: "black",
 			marginTop: 8,
-			marginBottom: 8
+			marginBottom: 8,
+			cursor: 'pointer'
 		};
 		const imageStyle = { maxWidth: "100%", objectFit: "contain" };
 		const likeStyle = { display: "flex", flexDirection: "row", alignContent: "center" };
@@ -87,30 +91,42 @@ export default class Post extends Component {
 		if(postData.url.endsWith(".gifv")){
 			let videourl = postData.url.replace(".gifv", ".mp4");
 			url = videourl;
-			postImage = <video src={videourl} style={imageStyle} autoPlay muted loop/>;
+			postImage = <video className="post-img" src={videourl} style={imageStyle} autoPlay muted loop/>;
 		} else {
 			url = postData.url
-			postImage = <img crossOrigin="" style={imageStyle} src={postData.url} ></img>;
+			postImage = <img className="post-img" crossOrigin="" style={imageStyle} src={postData.url} ></img>;
 		}
 
 		return(
 			<Grid item>
 				<Paper style={paperStyle}>
 					<div style={styles.postHeader}>
-						{postData.title}
-						<Menu auth={this.props.auth} fb={this.props.fb} pid={key} url={url}/>
-					</div>
-					<div style={cellStyle}>
-						{postImage}
-					</div>
-					<div style={descStyle}>
-						{postData.desc}
-					</div>
 					{this.props.auth.checkLoggedIn() ? <div style={likeStyle}>
 						<img src={this.state.liked ? redHeart : heart} width={24} height={24} onClick={this.like}
 								style={{cursor: "pointer"}}></img>
 						<div style={likeCounterStyle}> {this.state.likes}</div>
 					</div> : undefined}
+						<h5>{postData.title}</h5>
+						<Menu auth={this.props.auth} fb={this.props.fb} pid={key} url={url}/>
+					</div>
+					<div style={cellStyle} onClick={this.clickImage}>
+						{postImage}
+					</div>
+					<div style={descStyle}>
+						{postData.desc}
+					</div>
+					<Dialog
+						open={this.state.open}
+						onClose={this.clickImage}
+						fullScreen
+					>
+						<DialogContent>
+							<Toolbar>
+							<CloseIcon id='close' onClick={this.clickImage}/>
+							</Toolbar>
+							{postImage}
+						</DialogContent>
+					</Dialog>
 				</Paper>
 			</Grid>
 			)
@@ -186,7 +202,6 @@ class Report extends Component {
     render() {
 		const types = ['Not a dog', 'Not cute', 'Inappropriate', 'A cat', 'Other']
 		const { counter } = this.state;
-		// console.log(counter)
         return (
             <Dialog
                 open={this.props.open}
@@ -197,7 +212,7 @@ class Report extends Component {
                 aria-labelledby="scroll-dialog-title"
             >
 			<DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
-            	Report 
+            	Report Image
           	</DialogTitle>
                 <DialogContent>
 					<select onChange={(event) => this.reportInfo.reportCategory = event.target.value}>
@@ -210,7 +225,7 @@ class Report extends Component {
 							})
 						}
 					</select>
-					<img id='close' alt="close" src={x} onClick={this.props.click} style={{}}></img>
+					<CloseIcon id='close' onClick={this.props.click}/>
 					<textarea id="report-description" type="text" placeholder="Tell us more..." maxLength="500"
 							onChange={this.handleText}></textarea>
 					<p>Characters left: {this.state.counter}</p>
