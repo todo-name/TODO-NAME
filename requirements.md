@@ -8,8 +8,8 @@
 - The sign up button will say “Sign Up” when the user isn’t logged in, and “Sign Out” when the user is. (complete)
 - Clicking the Sign In button will open the sign in popup. (complete)
 - The sign in button, sign up button, and search box will appear in a row at the top of the screen. (complete)
-- Clicking the search bar will allow typing of plaintext search terms and tags preceded by hashtags.
-- Clicking the search icon, or hitting enter when the focus is on the search box, will trigger filtering of the image grid based on search terms. If no search terms are provided then no filtering will occur.
+- Clicking the search bar will allow typing of plaintext search terms and tags preceded by hashtags. (Revised: Since we got rid of tags (see below revision), users can only search by plaintext search term)
+- Clicking the search icon, or hitting enter when the focus is on the search box, will trigger filtering of the image grid based on search terms. If no search terms are provided then no filtering will occur. (Complete)
 - The image grid will display equally sized image tiles in a grid, below the row containing the search bar and below the upload button. (complete)
 - The size of each image in the image grid will scale up based on browser size to a maximum size, and then extra browser size will be used to add more images to the width or height of the grid. (complete)
 - The height of the image grid will fill the extent of the browser. (complete)
