@@ -76,6 +76,7 @@ export default class Post extends Component {
 		const imageStyle = { maxWidth: "100%", objectFit: "contain" };
 		const likeStyle = { display: "flex", flexDirection: "row", alignContent: "center" };
 		const likeCounterStyle = { marginLeft: 8 };
+		const descStyle = { marginBottom: 8 };
 
 		let post = this.props.post;
 		let key = Object.keys(post)[0];
@@ -93,11 +94,14 @@ export default class Post extends Component {
 			<Grid item>
 				<Paper style={paperStyle}>
 					<div style={styles.postHeader}>
-						{postData.desc}
+						{postData.title}
 						<Menu auth={this.props.auth} fb={this.props.fb} pid={key}/>
 					</div>
 					<div style={cellStyle}>
 						{postImage}
+					</div>
+					<div style={descStyle}>
+						{postData.desc}
 					</div>
 					{this.props.auth.checkLoggedIn() ? <div style={likeStyle}>
 						<img src={this.state.liked ? redHeart : heart} width={24} height={24} onClick={this.like}
@@ -148,11 +152,17 @@ class Menu extends Component {
 class Report extends Component {
 	constructor() {
 		super();
+		this.state={}
 		this.reportInfo = {
 			flagged: true,
 			reportCategory: "",
 			reportDesc: ""
 		}
+	}
+	confirm = () => {
+		this.setState({
+			confirm: true
+		})
 	}
     render() {
 		const types = ['Not a dog', 'Not cute', 'Inappropriate', 'A cat', 'Other']
@@ -181,9 +191,22 @@ class Report extends Component {
                 </DialogContent>
                 <DialogActions>
 					<button className="btn btn-primary" type="button" onClick={() => {
-						this.props.fb.flag(this.props.pid, this.reportInfo); this.props.click()}
+						this.props.fb.flag(this.props.pid, this.reportInfo); this.confirm()}
 					}>Report</button>
                 </DialogActions>
+				<Dialog
+					open={this.state.confirm}
+					onClose={this.props.click}
+					>
+					<DialogContent>
+						Report submitted!
+					</DialogContent>
+					<DialogActions>
+						<button type="button" onClick={this.props.click}>
+							Close
+						</button>
+					</DialogActions>
+				</Dialog>
             </Dialog>
         )
     }

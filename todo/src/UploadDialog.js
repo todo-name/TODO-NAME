@@ -8,6 +8,7 @@ export default class UploadDialog extends Component {
         let title = document.getElementById("title").value;
         let tags = document.getElementById("tags").value.split(/[ ,]+/);
         let image = document.getElementById("upload_image").files[0];
+        let desc = document.getElementById("desc").value;
 
         var apiUrl = 'https://api.imgur.com/3/image';
         var apiKey = '987f385fd491e1d';
@@ -17,6 +18,7 @@ export default class UploadDialog extends Component {
         xhr.setRequestHeader("Authorization", "Client-ID " + apiKey);
 
         let firebase = this.fb;
+        let auth = this.props.auth;
 
         xhr.onload = function() {
         	if(xhr.status == 200){
@@ -24,12 +26,12 @@ export default class UploadDialog extends Component {
         		console.log(imgurData);
 
         		let data = {
-        			desc: title,
+        			desc: desc,
         			flagged: false,
         			likes: 0,
         			time_posted: new Date(imgurData.datetime * 1000),
-        			title: "",
-        			uid: this.props.auth.getUser(),
+        			title: title,
+        			uid: auth.getUser(),
         			url: imgurData.link
         		};
 
@@ -70,6 +72,10 @@ export default class UploadDialog extends Component {
                         <div className="form-group">
                             <label htmlFor="title">Title</label><br />
                             <input type="text" id="title" name="title" className="form-control" required="required" maxLength="150" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="desc">Description</label><br />
+                            <input type="text" id="desc" name="description" className="form-control" required="required" maxLength="500" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="upload_image">Upload Image</label><br />
