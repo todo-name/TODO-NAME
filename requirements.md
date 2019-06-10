@@ -15,26 +15,26 @@
 - The height of the image grid will fill the extent of the browser.
 - Scrolling down on the page will load more images into the grid, with the same dimensions as the previous images.
 - Each tile in the image grid will have a title above it, a heart button in the top left of the image, and an ellipsis button in the top right of the image.
-- The heart button for each tile will be filled in when the user clicks on it.
-The ellipsis button will expand to show a menu with copy and report options.
-- The copy option, when clicked, will copy the link of the image to the user’s clipboard.
-The report option, when clicked, will open the report image dialog.
+- The heart button for each tile will be filled in when the user clicks on it. (complete)
+- The ellipsis button will expand to show a menu with copy and report options.
+- The copy option, when clicked, will copy the link of the image to the user’s clipboard. 
+- The report option, when clicked, will open the report image dialog.
 
 
 ## Upload Image
-- Input field “Title” is optional. Limit is 150 characters.
-- The upload image button will open “Finder” where user can navigate through their directories to find the right image to upload.  
-- Only one image is allowed.  
-- Once image is picked, the user will see the image display and a “Change Image” button will be next to the image if user decide to change to another image.
+- Input field “Title” is optional. Limit is 150 characters. (Complete)
+- The upload image button will open “Finder” where user can navigate through their directories to find the right image to upload.  (Complete)
+- Only one image is allowed.  (Complete)
+- Once image is picked, the user will see the image display and a “Change Image” button will be next to the image if user decide to change to another image. (Complete)
 - There is a “X” on the top right corner if user want to cancel uploading image. A warning will pop up where user can choose to stay or exit and discard changes.
-- User must be able to add “tags/descriptions” with maximum of 500 characters.
-- User must be able to use “#” to indicate tags.
-- User must be able to use emoji.
+- User must be able to add “tags/descriptions” with maximum of 500 characters. (Complete)
+- User must be able to use “#” to indicate tags. (Complete)
+- User must be able to use emoji. (Complete)
 - User must be able to click upload button and see their image at the top of the main page in the position
-of the left most frame on the top row.
-- When the newly uploaded picture is posted, the pictures already on the page shift to the frame to their right
+of the left most frame on the top row. (Complete)
+- When the newly uploaded picture is posted, the pictures already on the page shift to the frame to their right (Complete)
 - If picture is already at right most position upon a new picture upload, that picture gets shifted down a row and
-put in the left most column.
+put in the left most column. (Complete)
 
 
 ## Click on Image
@@ -59,7 +59,7 @@ put in the left most column.
 - Clicking the report button clears out the content of the report image popup and shows users visual feedback that says "Report submitted". (complete)
 - Clicking the close button below the visual feedback closes the popup and takes user back to original page. (complete)
 
-## Sign Up / Sign In / Sign Out
+## Sign Up / Sign In / Sign Out (Complete)
 - The "Sign In" button is displayed on the top of the screen to the right of the search bar when the user is signed out.
 - The signup button is displayed on the top right of the screen to the right of the "Sign In" button when the user is signed out.
 - Upon clicking the signup button, a popup screen that overlays the main screen is shown with 3 input text fields labeled email, password, and confirm password aligned vertically.
@@ -80,12 +80,12 @@ put in the left most column.
 - When user clicks Sign In and email is valid but that email has not been registered, a message saying "There is no user record corresponding to this identifier. The user may heave been deleted." will show below the password textarea.
 - When the user clicks on submit and email is valid but password is invalid, a message will show below the password textarea saying “The password is invalid or the user does not have a password”.
 - When the user clicks on submit and the inputted email and password are valid, the user is signed in and redirected to the main page.
-- A signed in user is able to post and like pictures.
+- A signed in user is able to post and like pictures. (complete)
 - When the user is signed in, the sign in and sign up button disappear and a sign out button appears to the right of the search bar.
 - When the user clicks on the sign out button, the user is signed out and the sign in and sign up appear in their original positions.
-- A signed out user is unable to post and like pictures.
+- A signed out user is unable to post and like pictures. (complete)
 
-## Mobile Look / Responsiveness
+## Mobile Look / Responsiveness (Complete)
 - On screens with width less than 992px, picture frames will be aligned in rows of 3 with all frames centered on the page horizontally, and all pictures evenly spaced from one another.
 - On screens with width greater than or equal to 1200px (large desktops), more pictures will be added to the rows based on the width and will stay evenly spaced from each other and be centered on the page horizontally.
 - All pictures will maintain a 1:1 aspect ratio as the browser is resized.
