@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap'
 import firebaseService from './Firebase/firebaseService';
 import PostGrid from './PostGrid';
+import x from './img/x.png';
 
 export default class UploadDialog extends Component {
     submit = (event) => {

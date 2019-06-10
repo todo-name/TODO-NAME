@@ -72,3 +72,15 @@ h5 {
   margin-top: 20px; 
   line-height: 2em;
 }
+
+#close {
+  width: 15px; 
+  height: 15px; 
+  position: absolute;
+  right: 10px; 
+  top: 10px;
+}
+
+#close:hover {
+  cursor: pointer;
+}
