@@ -38,11 +38,11 @@ put in the left most column.
 
 
 ## Click on Image
-- Images must load in full screen view when clicked on from the main page.
-- Images must scale to their native aspect ratios while still staying within the width of the page.
-- The full screen view must be scrollable if the native height of the image extends beyond the size of the browser.
-- Image max size will be determined by a max height proportional to the browser size.
-- The ellipsis in the top right corner must appear in the corner and be clickable for all users.
+- Images must load in full screen view when clicked on from the main page. (complete)
+- Images must scale to their native aspect ratios while still staying within the width of the page. (complete)
+- The full screen view must be scrollable if the native height of the image extends beyond the size of the browser. (complete)
+- Image max size will be determined by a max height proportional to the browser size. (complete)
+- The ellipsis in the top right corner must appear in the corner and be clickable for all users.(complete)
 - The like button must appear in the top left corner for logged in users only. (complete)
 - Clicking the ellipsis must make the additional options menu appear to the right side of it. (complete)
 - Clicking the copy button must copy the url for the image’s post to the user’s browser clipboard. (complete)
