@@ -22,19 +22,19 @@
 
 
 ## Upload Image
-- Input field “Title” is optional. Limit is 150 characters.
-- The upload image button will open “Finder” where user can navigate through their directories to find the right image to upload.  
-- Only one image is allowed.  
-- Once image is picked, the user will see the image display and a “Change Image” button will be next to the image if user decide to change to another image.
+- Input field “Title” is optional. Limit is 150 characters. (Complete)
+- The upload image button will open “Finder” where user can navigate through their directories to find the right image to upload.  (Complete)
+- Only one image is allowed.  (Complete)
+- Once image is picked, the user will see the image display and a “Change Image” button will be next to the image if user decide to change to another image. (Complete)
 - There is a “X” on the top right corner if user want to cancel uploading image. A warning will pop up where user can choose to stay or exit and discard changes.
-- User must be able to add “tags/descriptions” with maximum of 500 characters.
-- User must be able to use “#” to indicate tags.
-- User must be able to use emoji.
+- User must be able to add “tags/descriptions” with maximum of 500 characters. (Complete)
+- User must be able to use “#” to indicate tags. (Complete)
+- User must be able to use emoji. (Complete)
 - User must be able to click upload button and see their image at the top of the main page in the position
-of the left most frame on the top row.
-- When the newly uploaded picture is posted, the pictures already on the page shift to the frame to their right
+of the left most frame on the top row. (Complete)
+- When the newly uploaded picture is posted, the pictures already on the page shift to the frame to their right (Complete)
 - If picture is already at right most position upon a new picture upload, that picture gets shifted down a row and
-put in the left most column.
+put in the left most column. (Complete)
 
 
 ## Click on Image
