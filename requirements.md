@@ -2,7 +2,7 @@
 ## Main Page
 - All popups mentioned hereafter will appear as a new window within the same browser tab. (complete)
 - All popups mention hereafter will be closable by clicking outside the popup. (complete)
-- The upload button will be on the top right, below the row containing the sign in button, sign up button, and search box.
+- The upload button will be on the top right, below the row containing the sign in button, sign up button, and search box. (Revised: Upload button is placed along the same row as the sign out button to ensure functionality is contained within the nav bar)
 - The upload button will be clickable when the user is logged in, and disabled (greyed out) when the user isn’t. (complete)
 - Clicking the upload button will open the upload image popup. (complete)
 - The sign up button will say “Sign Up” when the user isn’t logged in, and “Sign Out” when the user is. (complete)
@@ -26,9 +26,9 @@
 - The upload image button will open “Finder” where user can navigate through their directories to find the right image to upload.  (Complete)
 - Only one image is allowed.  (Complete)
 - Once image is picked, the user will see the image display and a “Change Image” button will be next to the image if user decide to change to another image. (Complete)
-- There is a “X” on the top right corner if user want to cancel uploading image. A warning will pop up where user can choose to stay or exit and discard changes.
-- User must be able to add “tags/descriptions” with maximum of 500 characters. (Complete)
-- User must be able to use “#” to indicate tags. (Complete)
+- There is a “X” on the top right corner if user want to cancel uploading image. A warning will pop up where user can choose to stay or exit and discard changes. (Revised: Decided to not implement warning as user is not inputting much information, so an extra check is not necessary)
+- User must be able to add “tags/descriptions” with maximum of 500 characters. (Revised: Descriptions and tags served the same purpose of filtering out pictures when search is used, so we just kep description)
+- User must be able to use “#” to indicate tags. (Revised: No tags, so this requirement was also left out)
 - User must be able to use emoji. (Complete)
 - User must be able to click upload button and see their image at the top of the main page in the position
 of the left most frame on the top row. (Complete)
