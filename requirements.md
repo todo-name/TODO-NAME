@@ -59,7 +59,7 @@ put in the left most column.
 - Clicking the report button clears out the content of the report image popup and shows users visual feedback that says "Report submitted". (complete)
 - Clicking the close button below the visual feedback closes the popup and takes user back to original page. (complete)
 
-## Sign Up / Sign In / Sign Out
+## Sign Up / Sign In / Sign Out (Complete)
 - The "Sign In" button is displayed on the top of the screen to the right of the search bar when the user is signed out.
 - The signup button is displayed on the top right of the screen to the right of the "Sign In" button when the user is signed out.
 - Upon clicking the signup button, a popup screen that overlays the main screen is shown with 3 input text fields labeled email, password, and confirm password aligned vertically.
@@ -85,7 +85,7 @@ put in the left most column.
 - When the user clicks on the sign out button, the user is signed out and the sign in and sign up appear in their original positions.
 - A signed out user is unable to post and like pictures. (complete)
 
-## Mobile Look / Responsiveness
+## Mobile Look / Responsiveness (Complete)
 - On screens with width less than 992px, picture frames will be aligned in rows of 3 with all frames centered on the page horizontally, and all pictures evenly spaced from one another.
 - On screens with width greater than or equal to 1200px (large desktops), more pictures will be added to the rows based on the width and will stay evenly spaced from each other and be centered on the page horizontally.
 - All pictures will maintain a 1:1 aspect ratio as the browser is resized.
