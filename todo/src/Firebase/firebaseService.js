@@ -15,12 +15,15 @@ export default class FirebaseService {
     }
 
     get(pid) {
-        let data = {}
-        return this.db.doc(pid).get().then(
+        return this.db.get().then(
             snapshot => {
-                snapshot.forEach(snap => data.push({[snap.id]: snap.data()}));
-                console.log(snapshot)
-                return data;
+                let data = ''
+                snapshot.forEach(snap => {
+                    if (snap.id == pid) {
+                        return snap.data()
+                    }
+                });
+                return data
             }
         );
     }
