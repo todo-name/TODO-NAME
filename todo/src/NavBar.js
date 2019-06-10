@@ -72,23 +72,23 @@ export default class NavBar extends Component {
 
         if (this.props.login == false) {
             button =
-                <div class="form-inline form-right">
+                <div className="form-inline form-right">
                     <button id="signinButton" className="custom-button btn btn-primary" onClick={this.signinClick}>Sign In</button>
                     <button id="signupButton" className="custom-button btn btn-outline-secondary" onClick={this.signupClick}>Sign Up</button>
                 </div>
         } else {
             button =
-                <div class="form-inline form-right">
+                <div className="form-inline form-right">
                     <button id="uploadButton" className="custom-button btn btn-primary" onClick={this.uploadClick}>Upload</button>
                     <button id="signoutButton" className="custom-button btn btn-outline-secondary" onClick={this.signoutClick}>Sign Out</button>
                 </div>
         }
         return (
             <div>
-                <nav class="navbar navbar-light bg-light sticky-top">
-                    <form class="form-inline form-left flex-nowrap">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
-                        <button class="btn btn-outline-success my-2 my-sm-0 search" type="submit">Search</button>
+                <nav className="navbar navbar-light bg-light sticky-top">
+                    <form className="form-inline form-left flex-nowrap">
+                        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
+                        <button className="btn btn-outline-success my-2 my-sm-0 search" type="submit">Search</button>
                     </form>
                     {button}
                 </nav>
@@ -115,18 +115,18 @@ class Signinform extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <form onSubmit={this.props.handleSignin}>
-                        <div class="form-group">
+                        <div className="form-group">
                             <label htmlFor="email">Email:</label><br />
                             <input type="email" id="email" className="form-control" name="email" required="required" placeholder="Enter email"></input>
                         </div>
-                        <div class="form-group">
+                        <div className="form-group">
                             <label htmlFor="password">Password:</label><br />
                             <input type="password" id="password" className="form-control" name="password" required="required" placeholder="Password"></input>
                         </div>
                         <p>{this.props.error}</p>
                         <div className="button">
-                            <button type="submit" class="btn btn-primary">Sign In</button>
-                            <button type='button' class="btn btn-secondary form-right-button" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
+                            <button type="submit" className="btn btn-primary">Sign In</button>
+                            <button type='button' className="btn btn-secondary form-right-button" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
                         </div>
                     </form>
                 </Modal.Body>
@@ -144,16 +144,16 @@ class Signupform extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <form onSubmit={this.props.handleRegister} >
-                        <div class="form-group">
+                        <div className="form-group">
                             <label htmlFor="email">Email:</label><br />
                             <input type="email" id="email" className="form-control" name="email" required="required" placeholder="Enter email" />
                         </div>
-                        <div class="form-group">
+                        <div className="form-group">
                             <label htmlFor="password">Password:</label><br />
                             <input type="password" id="password" className="form-control" pattern=".{6,}" title="Six or more characters" required="required"
                                 placeholder="Password"></input>
                         </div>
-                        <div class="form-group">
+                        <div className="form-group">
                             <label htmlFor="confirm">Confirm password:</label><br />
                             <input type="password" id="confirm" className="form-control" name="passwordconf" required="required" placeholder="Password confirmation" />
                         </div>
@@ -178,7 +178,7 @@ class Successregister extends Component {
             <Modal show={this.props.registersuccess} onHide={this.props.cancel}>
                 <Modal.Body>
                     <p>Your account has been created and you have been logged in!</p>
-                    <button type='button' class="btn btn-primary" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
+                    <button type='button' className="btn btn-primary" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
                 </Modal.Body>
             </Modal>
         )

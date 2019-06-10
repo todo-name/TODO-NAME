@@ -10,10 +10,8 @@ export default class FirebaseService {
         return this.db.add(data);
     }
 
-    flag(post) {
-        this.db.doc(post[0].keys[0]).set({
-            flagged: true
-        }, {merge: true});
+    flag(pid, reportInfo) {
+        this.db.doc(pid).set(reportInfo, {merge: true});
     }
 
     get(pid) {
