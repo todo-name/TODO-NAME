@@ -72,7 +72,6 @@ export default class NavBar extends Component {
 
     handleUpload = (event) => {
         let title = document.getElementById("title").value;
-        let tags = document.getElementById("tags").value.split(/[ ,]+/);
         let image = document.getElementById("upload_image").files[0];
         let desc = document.getElementById("desc").value;
 
@@ -102,7 +101,9 @@ export default class NavBar extends Component {
         		};
 
         		firebase.add(data).then(function(docRef) {
-        			console.log("Document written with ID: ", docRef.id);
+                    console.log("Document written with ID: ", docRef.id);
+                    window.location.reload(); 
+                    this.props.getRecentPosts();
         		})
         		.catch(function(error) {
         			console.log("Error adding document: ", error);
@@ -115,7 +116,6 @@ export default class NavBar extends Component {
 
         event.preventDefault();
         this.cancelClick();
-        this.props.getRecentPosts();
     }
 
     
@@ -169,7 +169,7 @@ class UploadDialog extends Component {
                     <form onSubmit={this.props.upload}>
                         <div className="form-group">
                             <label htmlFor="title">Title</label><br />
-                            <input type="text" id="title" name="title" className="form-control" required="required" maxLength="150" />
+                            <input type="text" id="title" name="title" className="form-control" maxLength="150" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="desc">Description</label><br />
@@ -178,11 +178,6 @@ class UploadDialog extends Component {
                         <div className="form-group">
                             <label htmlFor="upload_image">Upload Image</label><br />
                             <input type="file" id="upload_image" name="image" accept="image/*" required="required" onChange={this.test} />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="tags">Tags:</label><br />
-                            <input type="tags" id="tags" name="tags"
-                                className="form-control" maxLength="500"></input>
                         </div>
                         <p>{this.props.error}</p>
                         <div className="button">
