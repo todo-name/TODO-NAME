@@ -4,7 +4,8 @@ import Paper from '@material-ui/core/Paper';
 import Dots from './img/dots.png';
 import copy from './img/copy.png';
 import mark from './img/exclamation.png';
-import { Dialog, DialogContent, DialogActions } from '@material-ui/core/';
+import x from './img/x.png';
+import { Dialog, DialogContent, DialogActions, DialogTitle } from '@material-ui/core/';
 
 import heart from './img/like.svg';
 import redHeart from './img/red_like.svg';
@@ -161,7 +162,9 @@ class Menu extends Component {
 class Report extends Component {
 	constructor() {
 		super();
-		this.state={}
+		this.state={
+			counter: 500
+		}
 		this.reportInfo = {
 			flagged: true,
 			reportCategory: "",
@@ -173,8 +176,17 @@ class Report extends Component {
 			confirm: true
 		})
 	}
+	handleText = (event) => {
+		var input = event.target.value;
+		this.reportInfo.reportDesc = input;
+		this.setState({
+			counter: 500 - input.length
+		})
+	}
     render() {
 		const types = ['Not a dog', 'Not cute', 'Inappropriate', 'A cat', 'Other']
+		const { counter } = this.state;
+		// console.log(counter)
         return (
             <Dialog
                 open={this.props.open}
@@ -184,6 +196,9 @@ class Report extends Component {
                 maxWidth='sm'
                 aria-labelledby="scroll-dialog-title"
             >
+			<DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
+            	Report 
+          	</DialogTitle>
                 <DialogContent>
 					<select onChange={(event) => this.reportInfo.reportCategory = event.target.value}>
 						<option value=""></option>
@@ -195,8 +210,10 @@ class Report extends Component {
 							})
 						}
 					</select>
+					<img id='close' alt="close" src={x} onClick={this.props.click} style={{}}></img>
 					<textarea id="report-description" type="text" placeholder="Tell us more..." maxLength="500"
-							onChange={(event) => this.reportInfo.reportDesc = event.target.value}></textarea>
+							onChange={this.handleText}></textarea>
+					<p>Characters left: {this.state.counter}</p>
                 </DialogContent>
                 <DialogActions>
 					<button className="btn btn-primary" type="button" onClick={() => {
