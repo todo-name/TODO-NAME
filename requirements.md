@@ -43,21 +43,21 @@ put in the left most column.
 - The full screen view must be scrollable if the native height of the image extends beyond the size of the browser.
 - Image max size will be determined by a max height proportional to the browser size.
 - The ellipsis in the top right corner must appear in the corner and be clickable for all users.
-- The like button must appear in the top left corner for logged in users only.
-- Clicking the ellipsis must make the additional options menu appear to the right side of it.
-- Clicking the copy button must copy the url for the image’s post to the user’s browser clipboard.
-- Clicking the report button must launch the Report Image popup and make the additional options menu disappear.
+- The like button must appear in the top left corner for logged in users only. (complete)
+- Clicking the ellipsis must make the additional options menu appear to the right side of it. (complete)
+- Clicking the copy button must copy the url for the image’s post to the user’s browser clipboard. (complete)
+- Clicking the report button must launch the Report Image popup and make the additional options menu disappear. (complete)
 
 ## Report Image
-- Users must be able to type a report of up to 500 characters in the text area.
-- The character counter in the bottom left corner must respond in real time to the amount of characters in the text area.
-- Characters written beyond the 500 character limit must not appear within the text area.
-- Clicking the “x” in the top right corner must close the popup.
-- Text in the text area must not persist if the “x” was clicked after text had been written.
-- Closing the popup must return users to their original position.
-- Clicking the report button must communicate the contents of the text area with content moderators.
-- Clicking the report button clears out the content of the report image popup and shows users visual feedback that says "Report submitted".
-- Clicking the close button below the visual feedback closes the popup and takes user back to original page.
+- Users must be able to type a report of up to 500 characters in the text area. (complete)
+- The character counter in the bottom left corner must respond in real time to the amount of characters in the text area. (complete)
+- Characters written beyond the 500 character limit must not appear within the text area. (complete)
+- Clicking the “x” in the top right corner must close the popup. (complete)
+- Text in the text area must not persist if the “x” was clicked after text had been written. (complete)
+- Closing the popup must return users to their original position. (complete)
+- Clicking the report button must communicate the contents of the text area with content moderators. (complete)
+- Clicking the report button clears out the content of the report image popup and shows users visual feedback that says "Report submitted". (complete)
+- Clicking the close button below the visual feedback closes the popup and takes user back to original page. (complete)
 
 ## Sign Up / Sign In / Sign Out
 - The "Sign In" button is displayed on the top of the screen to the right of the search bar when the user is signed out.

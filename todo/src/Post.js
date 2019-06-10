@@ -97,7 +97,12 @@ export default class Post extends Component {
 			<Grid item>
 				<Paper style={paperStyle}>
 					<div style={styles.postHeader}>
-						{postData.title}
+					{this.props.auth.checkLoggedIn() ? <div style={likeStyle}>
+						<img src={this.state.liked ? redHeart : heart} width={24} height={24} onClick={this.like}
+								style={{cursor: "pointer"}}></img>
+						<div style={likeCounterStyle}> {this.state.likes}</div>
+					</div> : undefined}
+						<h5>{postData.title}</h5>
 						<Menu auth={this.props.auth} fb={this.props.fb} pid={key} url={url}/>
 					</div>
 					<div style={cellStyle}>
@@ -106,11 +111,6 @@ export default class Post extends Component {
 					<div style={descStyle}>
 						{postData.desc}
 					</div>
-					{this.props.auth.checkLoggedIn() ? <div style={likeStyle}>
-						<img src={this.state.liked ? redHeart : heart} width={24} height={24} onClick={this.like}
-								style={{cursor: "pointer"}}></img>
-						<div style={likeCounterStyle}> {this.state.likes}</div>
-					</div> : undefined}
 				</Paper>
 			</Grid>
 			)
@@ -186,7 +186,6 @@ class Report extends Component {
     render() {
 		const types = ['Not a dog', 'Not cute', 'Inappropriate', 'A cat', 'Other']
 		const { counter } = this.state;
-		// console.log(counter)
         return (
             <Dialog
                 open={this.props.open}
@@ -197,7 +196,7 @@ class Report extends Component {
                 aria-labelledby="scroll-dialog-title"
             >
 			<DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
-            	Report 
+            	Report Image
           	</DialogTitle>
                 <DialogContent>
 					<select onChange={(event) => this.reportInfo.reportCategory = event.target.value}>
