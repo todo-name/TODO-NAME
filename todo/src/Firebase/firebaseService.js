@@ -18,8 +18,7 @@ export default class FirebaseService {
         let data = {}
         return this.db.doc(pid).get().then(
             snapshot => {
-                snapshot.forEach(snap => data.push({[snap.id]: snap.data()}));
-                return data;
+                return snaphsot.data();
             }
         );
     }
