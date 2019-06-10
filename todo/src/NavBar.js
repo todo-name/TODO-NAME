@@ -72,7 +72,6 @@ export default class NavBar extends Component {
 
     handleUpload = (event) => {
         let title = document.getElementById("title").value;
-        let tags = document.getElementById("tags").value.split(/[ ,]+/);
         let image = document.getElementById("upload_image").files[0];
         let desc = document.getElementById("desc").value;
 
@@ -179,11 +178,6 @@ class UploadDialog extends Component {
                         <div className="form-group">
                             <label htmlFor="upload_image">Upload Image</label><br />
                             <input type="file" id="upload_image" name="image" accept="image/*" required="required" onChange={this.test} />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="tags">Tags:</label><br />
-                            <input type="tags" id="tags" name="tags"
-                                className="form-control" maxLength="500"></input>
                         </div>
                         <p>{this.props.error}</p>
                         <div className="button">
