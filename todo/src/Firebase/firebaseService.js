@@ -21,6 +21,7 @@ export default class FirebaseService {
         return this.db.doc(pid).get().then(
             snapshot => {
                 snapshot.forEach(snap => data.push({[snap.id]: snap.data()}));
+                console.log(snapshot)
                 return data;
             }
         );

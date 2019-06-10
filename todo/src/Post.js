@@ -76,6 +76,7 @@ export default class Post extends Component {
 		const imageStyle = { maxWidth: "100%", objectFit: "contain" };
 		const likeStyle = { display: "flex", flexDirection: "row", alignContent: "center" };
 		const likeCounterStyle = { marginLeft: 8 };
+		const descStyle = { marginBottom: 8 };
 
 		let post = this.props.post;
 		let key = Object.keys(post)[0];
@@ -93,18 +94,20 @@ export default class Post extends Component {
 			<Grid item>
 				<Paper style={paperStyle}>
 					<div style={styles.postHeader}>
-						<h5>{postData.title}</h5>
-						<Menu auth={this.props.auth} fb={this.props.fb}/>
+						{postData.title}
+						<Menu auth={this.props.auth} fb={this.props.fb} pid={key}/>
 					</div>
 					<div style={cellStyle}>
 						{postImage}
+					</div>
+					<div style={descStyle}>
+						{postData.desc}
 					</div>
 					{this.props.auth.checkLoggedIn() ? <div style={likeStyle}>
 						<img src={this.state.liked ? redHeart : heart} width={24} height={24} onClick={this.like}
 								style={{cursor: "pointer"}}></img>
 						<div style={likeCounterStyle}> {this.state.likes}</div>
 					</div> : undefined}
-					{postData.desc}
 				</Paper>
 			</Grid>
 			)
@@ -132,14 +135,14 @@ class Menu extends Component {
 				<img className="dots dropdown-toggle"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"src={Dots}></img>						
 				<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					<a className="dropdown-item" href="#" >
-						<img src={copy} style={styles.icon} ></img>
+						<img src={copy} style={styles.icon}></img>
 						Copy Link
 					</a>
 					{this.props.auth.checkLoggedIn() ? <a className="dropdown-item" href="#" onClick={this.clickReport}>
 						<img src={mark} style={styles.icon}></img>
 						Report
 					</a> : undefined}
-					<Report open={this.state.open} click={this.clickReport}/>
+					<Report open={this.state.open} click={this.clickReport} fb={this.props.fb} pid={this.props.pid}/>
 				</div>
 			</div>
 		)
@@ -147,25 +150,22 @@ class Menu extends Component {
 }
 
 class Report extends Component {
-	confirmedMessage = (props) => {
-		return (
-			<Dialog
-				open='true'
-				onClose={props.click}
-			>
-				<DialogContent>
-					Report Submitted! 
-				</DialogContent>
-				<DialogActions>
-					<button className='btn btn-secondary' type='button'>
-						Close
-					</button>
-				</DialogActions>
-			</Dialog>
-		)
+	constructor() {
+		super();
+		this.state={}
+		this.reportInfo = {
+			flagged: true,
+			reportCategory: "",
+			reportDesc: ""
+		}
+	}
+	confirm = () => {
+		this.setState({
+			confirm: true
+		})
 	}
     render() {
-		const types = ['Not a dog', 'Not cute', 'A cat', 'Other']
+		const types = ['Not a dog', 'Not cute', 'Inappropriate', 'A cat', 'Other']
         return (
             <Dialog
                 open={this.props.open}
@@ -176,7 +176,8 @@ class Report extends Component {
                 aria-labelledby="scroll-dialog-title"
             >
                 <DialogContent>
-					<select>
+					<select onChange={(event) => this.reportInfo.reportCategory = event.target.value}>
+						<option value=""></option>
 						{
 							types.map((type) => {
 								return (
@@ -185,14 +186,28 @@ class Report extends Component {
 							})
 						}
 					</select>
-					<textarea id="report-description" type="text" placeholder="Tell us more..." maxLength="500"></textarea>
+					<textarea id="report-description" type="text" placeholder="Tell us more..." maxLength="500"
+							onChange={(event) => this.reportInfo.reportDesc = event.target.value}></textarea>
                 </DialogContent>
                 <DialogActions>
-					<button className="btn btn-primary" type="button" onClick={this.props.click}>Report</button>
+					<button className="btn btn-primary" type="button" onClick={() => {
+						this.props.fb.flag(this.props.pid, this.reportInfo); this.confirm()}
+					}>Report</button>
                 </DialogActions>
-				{this.confirmedMessage}
+				<Dialog
+					open={this.state.confirm}
+					onClose={this.props.click}
+					>
+					<DialogContent>
+						Report submitted!
+					</DialogContent>
+					<DialogActions>
+						<button type="button" onClick={this.props.click}>
+							Close
+						</button>
+					</DialogActions>
+				</Dialog>
             </Dialog>
         )
     }
 }
-
