@@ -81,7 +81,6 @@ export default class Post extends Component {
 		let post = this.props.post;
 		let key = Object.keys(post)[0];
 		let postData = post[key];
-
 		let postImage = null;
 		if(postData.url.endsWith(".gifv")){
 			let videourl = postData.url.replace(".gifv", ".mp4");
