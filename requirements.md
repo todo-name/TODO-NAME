@@ -1,24 +1,24 @@
 # Requirements
 ## Main Page
-- All popups mentioned hereafter will appear as a new window within the same browser tab.
-- All popups mention hereafter will be closable by clicking outside the popup
+- All popups mentioned hereafter will appear as a new window within the same browser tab. (complete)
+- All popups mention hereafter will be closable by clicking outside the popup. (complete)
 - The upload button will be on the top right, below the row containing the sign in button, sign up button, and search box.
-- The upload button will be clickable when the user is logged in, and disabled (greyed out) when the user isn’t
-- Clicking the upload button will open the upload image popup
-- The sign up button will say “Sign Up” when the user isn’t logged in, and “Sign Out” when the user is
-- Clicking the Sign In button will open the sign in popup
-- The sign in button, sign up button, and search box will appear in a row at the top of the screen.
+- The upload button will be clickable when the user is logged in, and disabled (greyed out) when the user isn’t. (complete)
+- Clicking the upload button will open the upload image popup. (complete)
+- The sign up button will say “Sign Up” when the user isn’t logged in, and “Sign Out” when the user is. (complete)
+- Clicking the Sign In button will open the sign in popup. (complete)
+- The sign in button, sign up button, and search box will appear in a row at the top of the screen. (complete)
 - Clicking the search bar will allow typing of plaintext search terms and tags preceded by hashtags.
 - Clicking the search icon, or hitting enter when the focus is on the search box, will trigger filtering of the image grid based on search terms. If no search terms are provided then no filtering will occur.
-- The image grid will display equally sized image tiles in a grid, below the row containing the search bar and below the upload button.
-- The size of each image in the image grid will scale up based on browser size to a maximum size, and then extra browser size will be used to add more images to the width or height of the grid.
-- The height of the image grid will fill the extent of the browser.
-- Scrolling down on the page will load more images into the grid, with the same dimensions as the previous images.
-- Each tile in the image grid will have a title above it, a heart button in the top left of the image, and an ellipsis button in the top right of the image.
+- The image grid will display equally sized image tiles in a grid, below the row containing the search bar and below the upload button. (complete)
+- The size of each image in the image grid will scale up based on browser size to a maximum size, and then extra browser size will be used to add more images to the width or height of the grid. (complete)
+- The height of the image grid will fill the extent of the browser. (complete)
+- Scrolling down on the page will load more images into the grid, with the same dimensions as the previous images. (complete)
+- Each tile in the image grid will have a title above it, a heart button in the top left of the image, and an ellipsis button in the top right of the image. (complete)
 - The heart button for each tile will be filled in when the user clicks on it. (complete)
-- The ellipsis button will expand to show a menu with copy and report options.
-- The copy option, when clicked, will copy the link of the image to the user’s clipboard. 
-- The report option, when clicked, will open the report image dialog.
+- The ellipsis button will expand to show a menu with copy and report options. (complete)
+- The copy option, when clicked, will copy the link of the image to the user’s clipboard. (complete)
+- The report option, when clicked, will open the report image dialog. (complete)
 
 
 ## Upload Image
