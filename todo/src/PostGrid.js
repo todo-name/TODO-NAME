@@ -7,7 +7,7 @@ export default class PostGrid extends Component {
 	constructor() {
 		super();
 		this.state = {
-			// postsData: [],
+			postsData: [],
 			postsLiked: []
 		}
 		this.fb = new firebaseService();
@@ -16,11 +16,13 @@ export default class PostGrid extends Component {
 		// this.getRecentPosts();
 		this.props.auth.postsLiked.subscribe(posts => this.setState({postsLiked: posts}));
 	}
-	// getRecentPosts() {
-	// 	this.fb.getRecent().then(data => {
-	// 		this.setState({postsData: data});
-	// 	})
-	// }
+
+	getRecentPosts() {
+		this.fb.getRecent().then(data => {
+			this.setState({postsData: data});
+		})
+	}
+
 	checkLiked(pid) {
 		return this.state.postsLiked.includes(pid);
 	}
@@ -39,7 +41,7 @@ export default class PostGrid extends Component {
     				width: '100%',
   				}}
     			>
-    		    
+    		    <h2>{this.props.results}</h2>
     		    {this.props.post.map((post, i) => (
 					<Post key={i} post={post} fb={this.fb} auth={this.props.auth} 
 							liked={this.checkLiked(Object.keys(post)[0])}/>

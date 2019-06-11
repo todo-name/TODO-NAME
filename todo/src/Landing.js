@@ -13,6 +13,7 @@ export default class Landing extends Component {
         this.state = {
             login: false,
             postsData: [],
+            results: ''
         }
         this.getRecentPosts = this.getRecentPosts.bind(this);
         this.auth = new Auth();
@@ -51,6 +52,7 @@ export default class Landing extends Component {
         event.preventDefault()
         let searchTerm = document.getElementById('term').value.toLowerCase();
         if (searchTerm == '') {
+            this.setState({results: ""})
             this.getRecentPosts()
         } else {
             if (searchTerm.includes(' ')) {
@@ -75,6 +77,11 @@ export default class Landing extends Component {
                         }
                     }
                 }
+                if (filteredPosts.length == 0) {
+                    this.setState({results: "No results"})
+                } else {
+                    this.setState({results: ""})
+                }
                 this.setState({postsData: filteredPosts})
             })
         }
@@ -82,7 +89,7 @@ export default class Landing extends Component {
 
     
     render() {
-    	let postGrid = <PostGrid auth={this.auth} post={this.state.postsData}/>;
+    	let postGrid = <PostGrid auth={this.auth} post={this.state.postsData} results={this.state.results}/>;
         return (
             <div>
                 <NavBar getRecentPosts={this.getRecentPosts} login={this.state.login} postGrid={postGrid} auth={this.auth} search={this.searchClick} upload={this.upload} uploadForm={this.state.uploadForm}/>

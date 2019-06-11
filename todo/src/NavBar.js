@@ -37,7 +37,8 @@ export default class NavBar extends Component {
             signinform: false,
             signupform: false,
             registersuccess: false,
-            uploadForm: false
+            uploadForm: false,
+            errorMessage: ''
         })
     }
 
@@ -264,7 +265,7 @@ class Successregister extends Component {
             <Modal show={this.props.registersuccess} onHide={this.props.cancel}>
                 <Modal.Body>
                     <p>Your account has been created and you have been logged in!</p>
-                    <button type='button' className="btn btn-primary" formnovalidate="formnovalidate" onClick={this.props.cancel}>Cancel</button>
+                    <button type='button' className="btn btn-primary" formnovalidate="formnovalidate" onClick={this.props.cancel}>Confirm</button>
                 </Modal.Body>
             </Modal>
         )
