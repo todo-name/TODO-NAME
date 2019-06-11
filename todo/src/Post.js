@@ -178,7 +178,8 @@ class Report extends Component {
 	constructor() {
 		super();
 		this.state={
-			counter: 500
+			counter: 500,
+			error: "",
 		}
 		this.reportInfo = {
 			flagged: true,
@@ -192,6 +193,7 @@ class Report extends Component {
 		})
 	}
 	handleText = (event) => {
+		this.setState({error: ""});
 		var input = event.target.value;
 		this.reportInfo.reportDesc = input;
 		this.setState({
@@ -214,7 +216,7 @@ class Report extends Component {
             	Report Image
           	</DialogTitle>
                 <DialogContent>
-					<select onChange={(event) => this.reportInfo.reportCategory = event.target.value}>
+					<select onChange={(event) => {this.setState({error: ""}); this.reportInfo.reportCategory = event.target.value;}}>
 						<option value=""></option>
 						{
 							types.map((type) => {
@@ -228,11 +230,17 @@ class Report extends Component {
 					<textarea id="report-description" type="text" placeholder="Tell us more..." maxLength="500"
 							onChange={this.handleText}></textarea>
 					<p>Characters left: {this.state.counter}</p>
+					{this.state.error.length !== 0 ? <p className="alert alert-danger">{this.state.error}</p> : undefined}
                 </DialogContent>
                 <DialogActions>
 					<button className="btn btn-primary" type="button" onClick={() => {
-						this.props.fb.flag(this.props.pid, this.reportInfo); this.confirm()}
-					}>Report</button>
+						if (this.reportInfo.reportCategory) {
+							this.props.fb.flag(this.props.pid, this.reportInfo); 
+							this.confirm();
+						} else {
+							this.setState({error: "Please select a report category"});
+						}
+					}}>Report</button>
                 </DialogActions>
 				<Dialog
 					open={this.state.confirm}
