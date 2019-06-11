@@ -42,19 +42,17 @@ export default class Post extends Component {
 
 	like = (event) => {
 		if (!this.state.liked) {
-			this.props.fb.likePost(this.props.post, this.props.auth.getUser()).then(results => {
-				this.setState({
-					likes: results,
-					liked: true
-				});
+			this.setState({
+				likes: this.state.likes + 1,
+				liked: true
 			});
+			this.props.fb.likePost(this.props.post, this.props.auth.getUser());
 		} else {
-			this.props.fb.unlikePost(this.props.post, this.props.auth.getUser()).then(results => {
-				this.setState({
-					likes: results,
-					liked: false
-				})
-			})
+			this.setState({
+				likes: this.state.likes - 1,
+				liked: false
+			});
+			this.props.fb.unlikePost(this.props.post, this.props.auth.getUser());
 		} 
 	}
 
@@ -66,7 +64,8 @@ export default class Post extends Component {
 			postHeader: {
 				display: "flex",
 				flexDirection: "row",
-				justifyContent: "space-between"
+				justifyContent: "space-between",
+				maxHeight: 100
 			},
 		};
 		const cellStyle = {
@@ -76,12 +75,14 @@ export default class Post extends Component {
 			background: "black",
 			marginTop: 8,
 			marginBottom: 8,
-			cursor: 'pointer'
+			cursor: 'pointer',
+			justifyContent: "center"
 		};
+		const postTitleStyle = { wordWrap: "break-word", overflow: "hidden" };
 		const imageStyle = { maxWidth: "100%", objectFit: "contain" };
-		const likeStyle = { display: "flex", flexDirection: "row", alignContent: "center" };
+		const likeStyle = { display: "flex", flexDirection: "row", alignContent: "center",  };
 		const likeCounterStyle = { marginLeft: 8 };
-		const descStyle = { marginBottom: 8 };
+		const descStyle = { marginBottom: 8, overflowY: "auto", wordWrap: "break-word", maxHeight: 100 };
 
 		let post = this.props.post;
 		let key = Object.keys(post)[0];
@@ -106,7 +107,7 @@ export default class Post extends Component {
 								style={{cursor: "pointer"}}></img>
 						<div style={likeCounterStyle}> {this.state.likes}</div>
 					</div> : undefined}
-						<h5>{postData.title}</h5>
+						<h5 style={postTitleStyle}>{postData.title}</h5>
 						<Menu auth={this.props.auth} fb={this.props.fb} pid={key} url={url}/>
 					</div>
 					<div style={cellStyle} onClick={this.clickImage}>
@@ -179,7 +180,8 @@ class Report extends Component {
 	constructor() {
 		super();
 		this.state={
-			counter: 500
+			counter: 500,
+			error: "",
 		}
 		this.reportInfo = {
 			flagged: true,
@@ -193,6 +195,7 @@ class Report extends Component {
 		})
 	}
 	handleText = (event) => {
+		this.setState({error: ""});
 		var input = event.target.value;
 		this.reportInfo.reportDesc = input;
 		this.setState({
@@ -215,7 +218,7 @@ class Report extends Component {
             	Report Image
           	</DialogTitle>
                 <DialogContent>
-					<select onChange={(event) => this.reportInfo.reportCategory = event.target.value}>
+					<select onChange={(event) => {this.setState({error: ""}); this.reportInfo.reportCategory = event.target.value;}}>
 						<option value=""></option>
 						{
 							types.map((type) => {
@@ -229,11 +232,17 @@ class Report extends Component {
 					<textarea id="report-description" type="text" placeholder="Tell us more..." maxLength="500"
 							onChange={this.handleText}></textarea>
 					<p>Characters left: {this.state.counter}</p>
+					{this.state.error.length !== 0 ? <p className="alert alert-danger">{this.state.error}</p> : undefined}
                 </DialogContent>
                 <DialogActions>
 					<button className="btn btn-primary" type="button" onClick={() => {
-						this.props.fb.flag(this.props.pid, this.reportInfo); this.confirm()}
-					}>Report</button>
+						if (this.reportInfo.reportCategory) {
+							this.props.fb.flag(this.props.pid, this.reportInfo); 
+							this.confirm();
+						} else {
+							this.setState({error: "Please select a report category"});
+						}
+					}}>Report</button>
                 </DialogActions>
 				<Dialog
 					open={this.state.confirm}

@@ -13,7 +13,8 @@ export default class Landing extends Component {
         this.state = {
             login: false,
             postsData: [],
-            results: ''
+            results: '',
+            postsLiked: []
         }
         this.getRecentPosts = this.getRecentPosts.bind(this);
         this.auth = new Auth();
@@ -23,6 +24,8 @@ export default class Landing extends Component {
     componentDidMount() {
         let fb = new FirebaseService();
         fb.getAll().then(val => console.log(val));
+        
+		this.auth.postsLiked.subscribe(posts => this.setState({postsLiked: posts}));
 
         // Detect when user logs in or out
         let authUnregFunc = firebase.auth().onAuthStateChanged((firebaseUser) => {
@@ -83,13 +86,14 @@ export default class Landing extends Component {
                     this.setState({results: ""})
                 }
                 this.setState({postsData: filteredPosts})
+                fb.getLikedPosts(this.auth.getUser()).then(data => this.auth.addLikedPosts(data));
             })
         }
     }
 
     
     render() {
-    	let postGrid = <PostGrid auth={this.auth} post={this.state.postsData} results={this.state.results}/>;
+    	let postGrid = <PostGrid auth={this.auth} post={this.state.postsData} results={this.state.results} postsLiked={this.state.postsLiked}/>;
         return (
             <div>
                 <NavBar getRecentPosts={this.getRecentPosts} login={this.state.login} postGrid={postGrid} auth={this.auth} search={this.searchClick} upload={this.upload} uploadForm={this.state.uploadForm}/>

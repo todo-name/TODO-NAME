@@ -8,8 +8,8 @@
 - The sign up button will say “Sign Up” when the user isn’t logged in, and “Sign Out” when the user is. (complete)
 - Clicking the Sign In button will open the sign in popup. (complete)
 - The sign in button, sign up button, and search box will appear in a row at the top of the screen. (complete)
-- Clicking the search bar will allow typing of plaintext search terms and tags preceded by hashtags.
-- Clicking the search icon, or hitting enter when the focus is on the search box, will trigger filtering of the image grid based on search terms. If no search terms are provided then no filtering will occur.
+- Clicking the search bar will allow typing of plaintext search terms and tags preceded by hashtags. (Revised: Since we got rid of tags (see below revision), users can only search by plaintext search term)
+- Clicking the search icon, or hitting enter when the focus is on the search box, will trigger filtering of the image grid based on search terms. If no search terms are provided then no filtering will occur. (Complete)
 - The image grid will display equally sized image tiles in a grid, below the row containing the search bar and below the upload button. (complete)
 - The size of each image in the image grid will scale up based on browser size to a maximum size, and then extra browser size will be used to add more images to the width or height of the grid. (complete)
 - The height of the image grid will fill the extent of the browser. (complete)
@@ -27,7 +27,7 @@
 - Only one image is allowed.  (Complete)
 - Once image is picked, the user will see the image display and a “Change Image” button will be next to the image if user decide to change to another image. (Complete)
 - There is a “X” on the top right corner if user want to cancel uploading image. A warning will pop up where user can choose to stay or exit and discard changes. (Revised: Decided to not implement warning as user is not inputting much information, so an extra check is not necessary)
-- User must be able to add “tags/descriptions” with maximum of 500 characters. (Revised: Descriptions and tags served the same purpose of filtering out pictures when search is used, so we just kep description)
+- User must be able to add “tags/descriptions” with maximum of 500 characters. (Revised: Descriptions and tags served the same purpose of filtering out pictures when search is used, so we just kept description)
 - User must be able to use “#” to indicate tags. (Revised: No tags, so this requirement was also left out)
 - User must be able to use emoji. (Complete)
 - User must be able to click upload button and see their image at the top of the main page in the position

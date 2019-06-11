@@ -6,25 +6,10 @@ import firebaseService from './Firebase/firebaseService';
 export default class PostGrid extends Component {
 	constructor() {
 		super();
-		this.state = {
-			postsData: [],
-			postsLiked: []
-		}
 		this.fb = new firebaseService();
 	}
-	componentDidMount(){
-		// this.getRecentPosts();
-		this.props.auth.postsLiked.subscribe(posts => this.setState({postsLiked: posts}));
-	}
-
-	getRecentPosts() {
-		this.fb.getRecent().then(data => {
-			this.setState({postsData: data});
-		})
-	}
-
 	checkLiked(pid) {
-		return this.state.postsLiked.includes(pid);
+		return this.props.postsLiked.includes(pid);
 	}
 
 	render() {
