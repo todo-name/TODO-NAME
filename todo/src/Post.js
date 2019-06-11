@@ -66,7 +66,8 @@ export default class Post extends Component {
 			postHeader: {
 				display: "flex",
 				flexDirection: "row",
-				justifyContent: "space-between"
+				justifyContent: "space-between",
+				maxHeight: 100
 			},
 		};
 		const cellStyle = {
@@ -79,10 +80,11 @@ export default class Post extends Component {
 			cursor: 'pointer',
 			justifyContent: "center"
 		};
+		const postTitleStyle = { wordWrap: "break-word", overflow: "hidden" };
 		const imageStyle = { maxWidth: "100%", objectFit: "contain" };
-		const likeStyle = { display: "flex", flexDirection: "row", alignContent: "center" };
+		const likeStyle = { display: "flex", flexDirection: "row", alignContent: "center",  };
 		const likeCounterStyle = { marginLeft: 8 };
-		const descStyle = { marginBottom: 8 };
+		const descStyle = { marginBottom: 8, overflowY: "auto", wordWrap: "break-word", maxHeight: 100 };
 
 		let post = this.props.post;
 		let key = Object.keys(post)[0];
@@ -107,7 +109,7 @@ export default class Post extends Component {
 								style={{cursor: "pointer"}}></img>
 						<div style={likeCounterStyle}> {this.state.likes}</div>
 					</div> : undefined}
-						<h5>{postData.title}</h5>
+						<h5 style={postTitleStyle}>{postData.title}</h5>
 						<Menu auth={this.props.auth} fb={this.props.fb} pid={key} url={url}/>
 					</div>
 					<div style={cellStyle} onClick={this.clickImage}>
