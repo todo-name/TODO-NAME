@@ -76,7 +76,8 @@ export default class Post extends Component {
 			background: "black",
 			marginTop: 8,
 			marginBottom: 8,
-			cursor: 'pointer'
+			cursor: 'pointer',
+			justifyContent: "center"
 		};
 		const imageStyle = { maxWidth: "100%", objectFit: "contain" };
 		const likeStyle = { display: "flex", flexDirection: "row", alignContent: "center" };
