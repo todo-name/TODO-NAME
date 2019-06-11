@@ -42,19 +42,17 @@ export default class Post extends Component {
 
 	like = (event) => {
 		if (!this.state.liked) {
-			this.props.fb.likePost(this.props.post, this.props.auth.getUser()).then(results => {
-				this.setState({
-					likes: results,
-					liked: true
-				});
+			this.setState({
+				likes: this.state.likes + 1,
+				liked: true
 			});
+			this.props.fb.likePost(this.props.post, this.props.auth.getUser());
 		} else {
-			this.props.fb.unlikePost(this.props.post, this.props.auth.getUser()).then(results => {
-				this.setState({
-					likes: results,
-					liked: false
-				})
-			})
+			this.setState({
+				likes: this.state.likes - 1,
+				liked: false
+			});
+			this.props.fb.unlikePost(this.props.post, this.props.auth.getUser());
 		} 
 	}
 
