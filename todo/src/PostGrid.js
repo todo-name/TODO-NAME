@@ -26,7 +26,7 @@ export default class PostGrid extends Component {
     				width: '100%',
   				}}
     			>
-    		    
+    		    <h2>{this.props.results}</h2>
     		    {this.props.post.map((post, i) => (
 					<Post key={i} post={post} fb={this.fb} auth={this.props.auth} 
 							liked={this.checkLiked(Object.keys(post)[0])}/>
