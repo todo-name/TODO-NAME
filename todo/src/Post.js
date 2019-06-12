@@ -161,15 +161,16 @@ class Menu extends Component {
 			<div className="dropdown">
 				<img className="dots dropdown-toggle"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"src={Dots}></img>						
 				<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a className="dropdown-item" href="#" >
-						<img src={copy} style={styles.icon} onClick={this.clickCopy}></img>
+				<div className="dropdown-item" onClick={this.clickCopy}>
+					<img src={copy} style={styles.icon} ></img>
 						Copy Link
-					</a>
-					{this.props.auth.checkLoggedIn() ? <a className="dropdown-item" href="#" onClick={this.clickReport}>
-						<img src={mark} style={styles.icon}></img>
+				</div>
+				{this.props.auth.checkLoggedIn() ? 
+				<div className="dropdown-item" onClick={this.clickReport}>
+					<img src={mark} style={styles.icon}></img>
 						Report
-					</a> : undefined}
-					<Report open={this.state.open} click={this.clickReport} fb={this.props.fb} pid={this.props.pid}/>
+				</div> : undefined}
+				<Report open={this.state.open} click={this.clickReport} fb={this.props.fb} pid={this.props.pid}/>
 				</div>
 			</div>
 		)
