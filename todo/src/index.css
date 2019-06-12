@@ -85,3 +85,7 @@ h5 {
 #close:hover {
   cursor: pointer;
 }
+
+.dropdown-item {
+  cursor: pointer;
+}
